@@ -30,9 +30,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '=6iehk1nzu)(iv%&lk%_qo+)$dd_eq-(3c8_@!)$7b7c0p^t3m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['focusdelivery.com.br', 'focusdelivery.herokuapp.com', 'herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*', ]
 
 # Application definition
 
@@ -57,7 +57,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'delivery.urls'
+ROOT_URLCONF = 'ciacimento.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'delivery.wsgi.application'
+WSGI_APPLICATION = 'ciacimento.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases

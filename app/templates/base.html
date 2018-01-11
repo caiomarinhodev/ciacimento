@@ -3,19 +3,19 @@
 <!DOCTYPE html>
 <html lang="en">
 {% block head %}
-    {% include 'head.html' %}
+    {% include 'site/head.html' %}
     <script src="{% static 'js/jquery.1.11.0.min.js' %}"></script>
     <link href="{% static 'css/sweetalert.min.css' %}" rel="stylesheet">
 {% endblock %}
 <body>
 
 <div id="all">
-    {% include 'header.html' %}
+    {% include 'site/header.html' %}
     {% block content %}
 
 
     {% endblock %}
-    {% include 'footer.html' %}
+    {% include 'site/footer.html' %}
 
 </div>
 <!-- /#all -->

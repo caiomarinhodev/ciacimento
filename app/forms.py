@@ -3,7 +3,7 @@
 from django import forms
 from django.forms import ModelForm, inlineformset_factory
 
-from app.models import Pedido, Ponto, Estabelecimento, Motorista
+from app.models import Pedido, Item, Cliente, Marca, Produto
 
 
 class BaseForm(forms.Form):
@@ -23,9 +23,9 @@ class FormBaseAddress(BaseForm):
                                                                        'placeholder': 'CEP'
                                                                        }))
     endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
-                                                                            'maxlength': 200,
-                                                                            'placeholder': 'Endereço'
-                                                                            }))
+                                                                             'maxlength': 200,
+                                                                             'placeholder': 'Endereço'
+                                                                             }))
     numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
                                                                          'maxlength': 200,
                                                                          'placeholder': 'Número'
@@ -44,68 +44,22 @@ class FormLogin(BaseForm):
                                                                  'placeholder': 'Senha'}))
 
 
-class FormPedido(ModelForm, BaseForm):
+# class FormPedido(ModelForm, BaseForm):
+#     class Meta:
+#         model = Pedido
+#         fields = []
+
+
+class FormItem(ModelForm, BaseForm):
     class Meta:
-        model = Pedido
-        fields = ['estabelecimento', 'is_draft']
+        model = Item
+        fields = ['produto', 'quantidade', ]
 
 
-class FormPonto(ModelForm, BaseForm):
-    cliente = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                            'maxlength': 200,
-                                                            'placeholder': 'Nome do Cliente'}))
-    telefone = forms.CharField(widget=forms.TextInput(attrs={'required': True, 'class': 'telefone',
-                                                             'maxlength': 200,
-                                                             'placeholder': 'Telefone do Cliente'}))
-    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
-                                                                             'maxlength': 200,
-                                                                             'placeholder': 'Endereço'
-                                                                             }))
-    numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
-                                                                         'maxlength': 6, 'class': 'numero',
-                                                                         'placeholder': 'Número'
-                                                                         }))
-    complemento = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
-                                                                                'maxlength': 200,
-                                                                                'placeholder': 'Ponto de Referencia'
-                                                                                }))
-    observacoes = forms.CharField(required=False, max_length=300, widget=forms.Textarea(attrs={'required': True,
-                                                                                               'maxlength': 300,
-                                                                                               'placeholder': 'Insira aqui as instrucoes de pagamento e o valor do pedido para ser coletado pelo motoboy'
-                                                                                               }))
-
+class FormEditItem(ModelForm, BaseForm):
     class Meta:
-        model = Ponto
-        fields = ['cliente', 'telefone', 'endereco', 'numero', 'bairro', 'complemento', 'observacoes']
-
-
-class FormEditPonto(ModelForm, BaseForm):
-    cliente = forms.CharField(widget=forms.TextInput(attrs={'required': False,
-                                                            'maxlength': 200,
-                                                            'placeholder': 'Nome do Cliente'}))
-    telefone = forms.CharField(widget=forms.TextInput(attrs={'required': False, 'class': 'telefone',
-                                                             'maxlength': 200,
-                                                             'placeholder': 'Telefone do Cliente'}))
-    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': False,
-                                                                             'maxlength': 200,
-                                                                             'placeholder': 'Endereço'
-                                                                             }))
-    numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': False,
-                                                                         'maxlength': 200, 'class': 'numero',
-                                                                         'placeholder': 'Número'
-                                                                         }))
-    complemento = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': False,
-                                                                                'maxlength': 200,
-                                                                                'placeholder': 'Ponto de Referencia'
-                                                                                }))
-    observacoes = forms.CharField(required=False, max_length=300, widget=forms.Textarea(attrs={'required': False,
-                                                                                               'maxlength': 300,
-                                                                                               'placeholder': 'Observações'
-                                                                                               }))
-
-    class Meta:
-        model = Ponto
-        fields = ['id', 'cliente', 'telefone', 'endereco', 'numero', 'bairro', 'complemento', 'observacoes']
+        model = Item
+        fields = ['produto', 'quantidade', ]
 
 
 class FormRegister(ModelForm, BaseForm):
@@ -124,24 +78,25 @@ class FormRegister(ModelForm, BaseForm):
                                                                        'maxlength': 200,
                                                                        'placeholder': 'CEP'
                                                                        }))
-    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
-                                                                            'maxlength': 200,
-                                                                            'placeholder': 'Endereço'
-                                                                            }))
+    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
+                                                                             'maxlength': 200,
+                                                                             'placeholder': 'Endereço'
+                                                                             }))
     numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
                                                                          'maxlength': 200,
                                                                          'placeholder': 'Número'
                                                                          }))
-    file = forms.FileField(required=False,
-                           widget=forms.FileInput(attrs={'required': True, 'placeholder': 'Logotipo do Estabelecimento'
-                                                         }))
+    bairro = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': True,
+                                                                           'maxlength': 100,
+                                                                           'placeholder': 'Bairro'
+                                                                           }))
 
     class Meta:
-        model = Estabelecimento
-        fields = ['bairro', ]
+        model = Cliente
+        fields = []
 
 
-class FormEditPerfil(ModelForm, BaseForm):
+class FormEditCliente(ModelForm, BaseForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                                'maxlength': 200,
                                                                'placeholder': 'Nome Estabelecimento'}))
@@ -156,52 +111,33 @@ class FormEditPerfil(ModelForm, BaseForm):
                                                                          'maxlength': 200,
                                                                          'placeholder': 'Número'
                                                                          }))
-    file = forms.FileField(required=False,
-                           widget=forms.FileInput(attrs={'required': True, 'placeholder': 'Logotipo do Estabelecimento'
-                                                         }))
+    bairro = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': True,
+                                                                           'maxlength': 100,
+                                                                           'placeholder': 'Bairro'
+                                                                           }))
 
     class Meta:
-        model = Estabelecimento
-        fields = ['bairro', ]
+        model = Cliente
+        fields = []
 
 
-class FormMotoristaRegister(ModelForm, BaseForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                               'maxlength': 200,
-                                                               'placeholder': 'Nome Completo'}))
-    username = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                             'maxlength': 200,
-                                                             'placeholder': 'Login'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'required': True,
-                                                                 'placeholder': 'Senha'}))
-    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
-                                                                            'maxlength': 200,
-                                                                            'placeholder': 'Endereço'
-                                                                            }))
-    numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
-                                                                         'maxlength': 200,
-                                                                         'placeholder': 'Número'
-                                                                         }))
-    phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                          'maxlength': 200,
-                                                          'placeholder': 'Telefone'}))
-    cpf = forms.CharField(max_length=15, required=False, widget=forms.TextInput(attrs={'required': True,
-                                                                                       'maxlength': 200,
-                                                                                       'placeholder': 'CPF'
-                                                                                       }))
-    placa = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'required': True,
-                                                                                         'maxlength': 200,
-                                                                                         'placeholder': 'Placa do Veiculo'
-                                                                                         }))
+class FormMarca(ModelForm, BaseForm):
     file = forms.FileField(required=False,
                            widget=forms.FileInput(attrs={'required': False, 'placeholder': 'Logotipo do Estabelecimento'
                                                          }))
 
     class Meta:
-        model = Motorista
-        fields = []
+        model = Marca
+        fields = ['site', 'nome', 'descricao', ]
 
 
-PontoFormSet = inlineformset_factory(Pedido, Ponto, form=FormPonto, extra=1)
+class FormProduto(ModelForm, BaseForm):
+    class Meta:
+        model = Produto
+        fields = ['cod', 'nome', 'categoria', 'cor', 'peso', 'marca', 'valor', 'is_oferta', 'descricao', 'instrucoes',
+                  'tipo_embalagem', ]
 
-PontoFormUpdateSet = inlineformset_factory(Pedido, Ponto, form=FormEditPonto, extra=0)
+
+ItemFormSet = inlineformset_factory(Pedido, Item, form=FormItem, extra=1)
+
+ItemFormUpdateSet = inlineformset_factory(Pedido, Item, form=FormEditItem, extra=0)

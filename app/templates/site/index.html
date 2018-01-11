@@ -1,0 +1,130 @@
+{% extends 'site/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <style>
+        .jumbotron {
+            padding-bottom: 0px;
+        }
+
+    </style>
+    {#    {% include 'carrossel.html' %}#}
+    <section class="no-mb">
+
+        <div class="jumbotron">
+
+            <div class="dark-mask"></div>
+
+            <div class="container">
+                <div class="row mb-small">
+                    <div class="col-sm-12 text-center">
+                        <h2>Toda tranquilidade quando se tem Cia do Cimento em sua obra.</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 ">
+                        <img class="img-responsive" src="{% static 'img/obra.png' %}" alt="">
+                    </div>
+
+                    <div class="col-sm-6 text-center-xs">
+                        <p class="text-uppercase">Possuímos a mais inteligente Logística <br/>
+                            para sua comodidade.
+                        </p>
+                        <p>Acesse agora nosso catálogo de produtos<br/> e faça seu pedido.
+                            <br/></p>
+                        <p>
+                            <a href="#packages" class="scroll-to btn btn-template-transparent-black">Acessar
+                                Catálogo</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- *** JUMBOTRON END *** -->
+    </section>
+
+    <section class="bar background-gray no-mb padding-big text-center-sm">
+        <div class="container" style="">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-uppercase" style="color: #0c0c0c">Sobre Nós</h2>
+                    <p class="lead mb-small">Somos a Cia do Cimento. </p>
+                    <p class="lead mb-small">Uma empresa multi marcas de distribuição
+                        segmentada a construção civil. <br/>
+                        Temos nossa parceria com marcas consolidadas ao mercado, e estamos dispostos a lhe atender bem
+                        oferecendo o melhor entre os materiais de construção.
+                    </p>
+
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="{% static 'img/log-cia.png' %}" alt="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bar no-mb color-white padding-big text-center-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img src="{% static 'img/template-easy-code.png' %}" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-uppercase">Confiança e Responsabilidade </h2>
+                    <p class="lead mb-small">
+                        Conheça os tipos de cimentos produzidos pelas industrias parceira e fique por dentro de alguns
+                        fatores importantes sobre a utilização de cada tipo do cimento
+                    </p>
+
+                    <p class="lead mb-small">
+                        Levamos muito a sério nossa logística com um visão focada na parceria e satisfação dos clientes.
+                        Distribuímos qualidade com serviço personalizado em carregamento e entrega de cimentos na
+                        Paraíba.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bar background-gray no-mb padding-big text-center-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-uppercase" style="color: #0c0c0c">Satisfação Garantida</h2>
+                    <p class="lead mb-small">
+                        Venda cimentos de qualidade por ótimos preços em seu estabelecimento comercial ou utilize em sua
+                        construção. Solicite agora mesmo uma visita de um de nossos vendedores
+                    </p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="{% static 'img/template-easy-customize.png' %}" alt="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="bar background-image-fixed-2 no-mb color-white text-center">
+        <div class="dark-mask"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="icon icon-lg">
+                        <i class="fa fa-file-code-o"></i>
+                    </div>
+                    <h1>Deseja ver nossos Produtos?</h1>
+                    <p class="lead">Temos preparado para você um catálogo com nossos mais diversos produtos.</p>
+                    <p class="text-center">
+                        <a href="index3.html" class="btn btn-template-transparent-black btn-lg">Acessar Catálogo</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
