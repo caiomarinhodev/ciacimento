@@ -4,10 +4,12 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 from django.views.generic import FormView
 from django.views.generic import RedirectView
 
 from app.forms import FormLogin
+from app.models import Message
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017"
@@ -19,6 +21,7 @@ class LoginView(FormView):
     """
     template_name = 'login/login.html'
     form_class = FormLogin
+
     # success_url = '/'
 
     def form_valid(self, form):
@@ -61,3 +64,18 @@ class LogoutView(RedirectView):
     def get(self, request, *args, **kwargs):
         logout(self.request)
         return super(LogoutView, self).get(request, *args, **kwargs)
+
+
+def submit_message(request):
+    data = request.POST
+    name = data.get('name')
+    message = data.get('message')
+    email = data.get('email')
+    try:
+        objeto = Message(name=name, email=email, message=message)
+        objeto.save()
+        messages.success(request, 'Mensagem enviada com Sucesso!')
+        return redirect('/')
+    except:
+        messages.error(request, 'Houve algum erro. Tente Novamente!')
+        return redirect('/')

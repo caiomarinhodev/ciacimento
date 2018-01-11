@@ -63,17 +63,18 @@
 {% endif %}
 
 <script>
+    $('#home').addClass('active');
     $(document).ready(function () {
-        var menu = location.pathname;
-        if (menu === '/') {
-            $('#home').addClass('active');
-        } else if (menu === '/sobre') {
+
+        $('#about').click(function () {
+             $('.active').removeClass('active');
             $('#about').addClass('active');
-        } else if (menu === '/loja/') {
-            $('#loja').addClass('active');
-        } else {
+        });
+
+        $('#contact').click(function () {
+             $('.active').removeClass('active');
             $('#contact').addClass('active');
-        }
+        });
 
     });
 </script>

@@ -120,3 +120,16 @@ class Notification(TimeStamped):
     to = models.ForeignKey(User, on_delete=models.CASCADE)
     type_message = models.CharField(choices=type_notification, max_length=100)
     is_read = models.BooleanField(default=False)
+
+
+class Message(models.Model):
+    class Meta:
+        verbose_name = "Mensagem"
+        verbose_name_plural = "Mensagens"
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.name, self.email)

@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 
 from app.views.HomeView import HomeView
 # from app.views.LoginView import LoginView, LogoutView, RegisterView, EditarPerfilView, RegisterMotoristaView
-from app.views.LoginView import LoginView, LogoutView
+from app.views.LoginView import LoginView, LogoutView, submit_message
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017, LES-UFCG"
@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^account/logout/$', LogoutView.as_view(), name='auth_logout'),
+    url(r'^submit-contact', submit_message, name='submit_contact'),
 
-    #url(r'^app/perfil/edit/$', EditarPerfilView.as_view(), name="edit_perfil_view"),
-
+    # url(r'^app/perfil/edit/$', EditarPerfilView.as_view(), name="edit_perfil_view"),
 
 ]

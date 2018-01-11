@@ -57,6 +57,10 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = ('id', 'message', 'type_message', 'to', 'is_read')
 
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'message', 'email',)
+
+
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
@@ -65,3 +69,4 @@ admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Marca, MarcaAdmin)
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Item, ItemAdmin)
+admin.site.register(Message, MessageAdmin)
