@@ -31,6 +31,9 @@ class Usuario(TimeStamped):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     is_gerente = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return u'%s - %s' % (self.user)
+
 
 class Cliente(TimeStamped, BaseAddress):
     # user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
@@ -53,6 +56,16 @@ class Cliente(TimeStamped, BaseAddress):
 class Categoria(TimeStamped):
     nome = models.CharField(max_length=100)
 
+    def __unicode__(self):
+        return u'%s' % (self.nome)
+
+
+class Tipo(TimeStamped):
+    nome = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return u'%s' % (self.nome)
+
 
 class Marca(TimeStamped):
     nome = models.CharField(max_length=100)
@@ -60,10 +73,14 @@ class Marca(TimeStamped):
     descricao = models.TextField(blank=True, null=True)
     foto = models.URLField(blank=True, null=True)
 
+    def __unicode__(self):
+        return u'%s' % (self.nome)
+
 
 class Produto(TimeStamped):
     cod = models.CharField(max_length=50)
     nome = models.CharField(max_length=100)
+    tipo = models.ForeignKey(Tipo, blank=True, null=True, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, blank=True, null=True, on_delete=models.CASCADE)
     cor = models.CharField(max_length=100, blank=True, null=True)
     peso = models.CharField(max_length=50, blank=True, null=True)
@@ -75,10 +92,16 @@ class Produto(TimeStamped):
     instrucoes = models.TextField(blank=True, null=True)
     tipo_embalagem = models.CharField(max_length=100, blank=True, null=True)
 
+    def __unicode__(self):
+        return u'%s - %s' % (self.nome, self.marca)
+
 
 class Pedido(TimeStamped):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # USER
     valor_total = models.CharField(max_length=100, blank=True, null=True)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.cliente, self.valor_total)
 
     def save(self, *args, **kwargs):
         valor = 0.00
@@ -93,12 +116,18 @@ class Foto(TimeStamped):
     url = models.URLField(null=True, blank=True)
     produto = models.ForeignKey(Produto, null=True, blank=True, on_delete=models.CASCADE)
 
+    def __unicode__(self):
+        return u'%s' % (self.url)
+
 
 class Item(TimeStamped):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.CharField(max_length=100)
     valor_item = models.CharField(max_length=100, blank=True, null=True)
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.produto, self.quantidade)
 
     def save(self, *args, **kwargs):
         valor = 0.00
@@ -126,6 +155,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Mensagem"
         verbose_name_plural = "Mensagens"
+
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     message = models.TextField(blank=True, null=True)

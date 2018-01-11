@@ -61,6 +61,9 @@ class MessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'message', 'email',)
 
 
+class TipoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'id',)
+
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
@@ -70,3 +73,4 @@ admin.site.register(Marca, MarcaAdmin)
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Message, MessageAdmin)
+admin.site.register(Tipo, TipoAdmin)

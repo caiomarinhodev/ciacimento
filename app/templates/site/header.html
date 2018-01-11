@@ -62,16 +62,16 @@ _________________________________________________________ -->
 
                     <ul class="nav navbar-nav navbar-right">
                         <li id="home" class="">
-                            <a href="/">Home</a>
+                            <a href="{% url 'home' %}">Home</a>
                         </li>
                         <li id="about" class="">
-                            <a href="#sobre">Sobre</a>
+                            <a href="{% url 'home' %}#sobre">Sobre</a>
                         </li>
                         <li id="loja" class="">
-                            <a href="/loja">Loja</a>
+                            <a href="{% url 'catalogo' %}">Loja</a>
                         </li>
                         <li id="contact" class="">
-                            <a href="#contato">Contato</a>
+                            <a href="{% url 'home' %}#contato">Contato</a>
                         </li>
                     </ul>
 
