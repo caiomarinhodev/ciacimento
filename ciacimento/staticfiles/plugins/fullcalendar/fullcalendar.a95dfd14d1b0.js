@@ -225,7 +225,7 @@ fc.datepickerLang = function(langCode, dpLangCode, dpOptions) {
 		fcOptions[name] = func(dpOptions);
 	});
 
-	// is jQuery UI Datepicker is on the page?
+	// is jQuery UI Datepicker is on the login?
 	if ($.datepicker) {
 
 		// Register the language data.

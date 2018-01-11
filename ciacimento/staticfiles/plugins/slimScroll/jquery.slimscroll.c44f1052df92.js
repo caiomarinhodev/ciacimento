@@ -256,7 +256,7 @@
           });
 
           me.bind('MSPointerMove', function (e) {
-            // prevent scrolling the page if necessary
+            // prevent scrolling the login if necessary
             e.originalEvent.preventDefault();
             if (e.originalEvent.targetTouches.length)
             {
@@ -279,7 +279,7 @@
           });
 
           me.bind('touchmove', function (e) {
-            // prevent scrolling the page if necessary
+            // prevent scrolling the login if necessary
             if (!releaseScroll)
             {
               e.originalEvent.preventDefault();

@@ -35,7 +35,7 @@ $.AdminLTE = {};
 $.AdminLTE.options = {
   //Add slimscroll to navbar menus
   //This requires you to load the slimscroll plugin
-  //in every page before app.js
+  //in every login before app.js
   navbarMenuSlimscroll: true,
   navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
   navbarMenuHeight: "200px", //The height of the inner menu
@@ -140,7 +140,7 @@ $.AdminLTE.options = {
 $(function () {
   "use strict";
 
-  //Fix for IE page transitions
+  //Fix for IE login transitions
   $("body").removeClass("hold-transition");
 
   //Extend options if external options exist
@@ -424,7 +424,7 @@ function _init() {
           _this.layout.fix();
         });
       }
-      //if this isn't a link, prevent the page from being redirected
+      //if this isn't a link, prevent the login from being redirected
       if (checkElement.is('.treeview-menu')) {
         e.preventDefault();
       }

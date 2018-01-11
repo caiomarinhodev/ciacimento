@@ -22,7 +22,7 @@ class FotoAdmin(admin.ModelAdmin):
 
 
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'cpf', 'phone', 'full_address', 'created_at')
+    list_display = ('id', 'phone', 'full_address', 'created_at')
 
 
 class CategoriaAdmin(admin.ModelAdmin):

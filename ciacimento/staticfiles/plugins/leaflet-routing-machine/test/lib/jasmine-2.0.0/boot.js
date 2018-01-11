@@ -18,7 +18,7 @@
   window.jasmine = jasmineRequire.core(jasmineRequire);
 
   /**
-   * Since this is being run in a browser and the results should populate to an HTML page, require the HTML-specific Jasmine code, injecting the same reference.
+   * Since this is being run in a browser and the results should populate to an HTML login, require the HTML-specific Jasmine code, injecting the same reference.
    */
   jasmineRequire.html(jasmine);
 
@@ -119,7 +119,7 @@
 
   /**
    * ## Reporters
-   * The `HtmlReporter` builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).
+   * The `HtmlReporter` builds all of the HTML UI for the runner login. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).
    */
   var htmlReporter = new jasmine.HtmlReporter({
     env: env,

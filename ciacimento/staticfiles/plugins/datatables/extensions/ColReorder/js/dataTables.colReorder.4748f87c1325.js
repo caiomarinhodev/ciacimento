@@ -1034,7 +1034,7 @@ ColReorder.prototype = {
 
 	/**
 	 * Copy the TH element that is being drags so the user has the idea that they are actually
-	 * moving it around the page.
+	 * moving it around the login.
 	 *  @method  _fnCreateDragNode
 	 *  @returns void
 	 *  @private

@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.views.generic import TemplateView
-
-from app.mixins.CustomContextMixin import DashboardMixin
 
 """HomeView.py: Especifica a pagina inicial da aplicacao."""
 

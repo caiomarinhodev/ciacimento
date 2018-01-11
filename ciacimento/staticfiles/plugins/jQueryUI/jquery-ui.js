@@ -3806,7 +3806,7 @@ function datepicker_getZindex( elem ) {
 /* Date picker manager.
    Use the singleton instance of this class, $.datepicker, to interact with the date picker.
    Settings for (groups of) date pickers are maintained in an instance object,
-   allowing multiple different settings on the same page. */
+   allowing multiple different settings on the same login. */
 
 function Datepicker() {
 	this._curInst = null; // The current instance in use
@@ -4368,7 +4368,7 @@ $.extend(Datepicker.prototype, {
 				case 33: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
 							-$.datepicker._get(inst, "stepBigMonths") :
 							-$.datepicker._get(inst, "stepMonths")), "M");
-						break; // previous month/year on page up/+ ctrl
+						break; // previous month/year on login up/+ ctrl
 				case 34: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
 							+$.datepicker._get(inst, "stepBigMonths") :
 							+$.datepicker._get(inst, "stepMonths")), "M");
@@ -6541,7 +6541,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 
 				// refreshPositions is called at drag start to refresh the containerCache
 				// which is used in drag. This ensures it's initialized and synchronized
-				// with any changes that might have happened on the page since initialization.
+				// with any changes that might have happened on the login since initialization.
 				sortable.refreshPositions();
 				sortable._trigger("activate", event, uiSortable);
 			}
@@ -12817,7 +12817,7 @@ var slider = $.widget( "ui.slider", $.ui.mouse, {
 	},
 
 	// number of pages in a slider
-	// (how many times can you page up/down to go through the whole range)
+	// (how many times can you login up/down to go through the whole range)
 	numPages: 5,
 
 	_create: function() {

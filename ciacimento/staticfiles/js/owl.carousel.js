@@ -443,10 +443,10 @@ if (typeof Object.create !== "function") {
             base.paginationWrapper = $("<div class=\"owl-pagination\"/>");
             base.owlControls.append(base.paginationWrapper);
 
-            base.paginationWrapper.on("touchend.owlControls mouseup.owlControls", ".owl-page", function (event) {
+            base.paginationWrapper.on("touchend.owlControls mouseup.owlControls", ".owl-login", function (event) {
                 event.preventDefault();
-                if (Number($(this).data("owl-page")) !== base.currentItem) {
-                    base.goTo(Number($(this).data("owl-page")), true);
+                if (Number($(this).data("owl-login")) !== base.currentItem) {
+                    base.goTo(Number($(this).data("owl-login")), true);
                 }
             });
         },
@@ -476,7 +476,7 @@ if (typeof Object.create !== "function") {
                         lastItem = base.itemsAmount - base.options.items;
                     }
                     paginationButton = $("<div/>", {
-                        "class" : "owl-page"
+                        "class" : "owl-login"
                     });
                     paginationButtonInner = $("<span></span>", {
                         "text": base.options.paginationNumbers === true ? counter : "",
@@ -484,7 +484,7 @@ if (typeof Object.create !== "function") {
                     });
                     paginationButton.append(paginationButtonInner);
 
-                    paginationButton.data("owl-page", lastPage === i ? lastItem : i);
+                    paginationButton.data("owl-login", lastPage === i ? lastItem : i);
                     paginationButton.data("owl-roundPages", counter);
 
                     base.paginationWrapper.append(paginationButton);
@@ -497,10 +497,10 @@ if (typeof Object.create !== "function") {
             if (base.options.pagination === false) {
                 return false;
             }
-            base.paginationWrapper.find(".owl-page").each(function () {
+            base.paginationWrapper.find(".owl-login").each(function () {
                 if ($(this).data("owl-roundPages") === $(base.$owlItems[base.currentItem]).data("owl-roundPages")) {
                     base.paginationWrapper
-                        .find(".owl-page")
+                        .find(".owl-login")
                         .removeClass("active");
                     $(this).addClass("active");
                 }

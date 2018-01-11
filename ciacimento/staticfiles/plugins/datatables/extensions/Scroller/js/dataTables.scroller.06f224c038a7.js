@@ -34,7 +34,7 @@ var factory = function( $, DataTable ) {
  * the scrolling smooth) is drawn, while the scrolling container gives the
  * visual impression that the whole table is visible. This is done by making use
  * of the pagination abilities of DataTables and moving the table around in the
- * scrolling container DataTables adds to the page. The scrolling container is
+ * scrolling container DataTables adds to the login. The scrolling container is
  * forced to the height it would be for the full table display using an extra
  * element.
  *
@@ -473,7 +473,7 @@ Scroller.prototype = /** @lends Scroller.prototype */{
 		}
 		this.fnMeasure( false );
 
-		/* Scrolling callback to see if a page change is needed - use a throttled
+		/* Scrolling callback to see if a login change is needed - use a throttled
 		 * function for the save save callback so we aren't hitting it on every
 		 * scroll
 		 */

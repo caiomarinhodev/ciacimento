@@ -20,16 +20,21 @@ class BaseAddress(models.Model):
         abstract = True
 
     bairro = models.CharField(max_length=200, blank=True, null=True, verbose_name='Bairro')
-    endereco = models.CharField(max_length=200, blank=True, null=True,  verbose_name='Endereço')
+    endereco = models.CharField(max_length=200, blank=True, null=True, verbose_name='Endereço')
     numero = models.CharField(max_length=5, blank=True, null=True, verbose_name='Número')
     complemento = models.CharField(max_length=300, blank=True, null=True, verbose_name='Ponto de Referência')
     lat = models.CharField(max_length=100, blank=True, null=True)
     lng = models.CharField(max_length=100, blank=True, null=True)
 
 
-class Cliente(TimeStamped, BaseAddress):
+class Usuario(TimeStamped):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    cpf = models.CharField(max_length=100, blank=True, null=True, default="")
+    is_gerente = models.BooleanField(default=False)
+
+
+class Cliente(TimeStamped, BaseAddress):
+    # user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    # cpf = models.CharField(max_length=100, blank=True, null=True, default="")
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.CharField(max_length=200, blank=True, null=True)
 
@@ -72,7 +77,7 @@ class Produto(TimeStamped):
 
 
 class Pedido(TimeStamped):
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE)  # USER
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # USER
     valor_total = models.CharField(max_length=100, blank=True, null=True)
 
     def save(self, *args, **kwargs):

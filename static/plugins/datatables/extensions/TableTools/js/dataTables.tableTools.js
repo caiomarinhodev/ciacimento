@@ -45,7 +45,7 @@ var factory = function( $, DataTable ) {
 var ZeroClipboard_TableTools = {
 
 	version: "1.0.4-TableTools2",
-	clients: {}, // registered upload clients on page, indexed by id
+	clients: {}, // registered upload clients on login, indexed by id
 	moviePath: '', // URL to movie
 	nextId: 1, // ID of next movie
 
@@ -2458,7 +2458,7 @@ TableTools.prototype = {
 			this.fnInfo( oConfig.sInfo, 3000 );
 		}
 
-		/* Add a message at the top of the page */
+		/* Add a message at the top of the login */
 		if ( oConfig.sMessage )
 		{
 			$('<div/>')
@@ -2467,7 +2467,7 @@ TableTools.prototype = {
 				.prependTo( 'body' );
 		}
 
-		/* Cache the scrolling and the jump to the top of the page */
+		/* Cache the scrolling and the jump to the top of the login */
 		this.s.print.saveScroll = $(window).scrollTop();
 		window.scrollTo( 0, 0 );
 
