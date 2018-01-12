@@ -1,0 +1,129 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Checkout - Endereço</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>Checkout - Endereço</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-10 col-md-offset-1 clearfix" id="checkout">
+
+                    <div class="box">
+                        <form method="post" action="">
+                            {% csrf_token %}
+
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="active"><a href="#"><i class="fa fa-map-marker"></i><br>Endereço</a>
+                                </li>
+                            </ul>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="firstname">Nome Completo</label>
+                                            {{ form.nome }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="street">Endereço</label>
+                                            {{ form.endereco }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="street">Número</label>
+                                            {{ form.numero }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="city">Bairro</label>
+                                            {{ form.bairro }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="zip">Cidade</label>
+                                            {{ form.cidade }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">Telefone</label>
+                                            {{ form.phone }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.row -->
+                            </div>
+
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <a href="{% url 'catalogo' %}" class="btn btn-default"><i
+                                            class="fa fa-chevron-left"></i>Voltar</a>
+                                </div>
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-template-main">
+                                        Finalizar Pedido
+                                        <i class="fa fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+                <!-- /.col-md-9 -->
+
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+{% endblock %}

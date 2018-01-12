@@ -43,7 +43,8 @@
                                 <div class="product">
                                     <div class="image">
                                         <a href="{% url 'produto' produto.pk %}">
-                                            <img src="{{ produto.foto_set.first }}" alt="" class="img-responsive image1">
+                                            <img src="{{ produto.foto_set.first }}" alt=""
+                                                 class="img-responsive image1">
                                         </a>
                                     </div>
                                     <!-- /.image -->
@@ -53,8 +54,9 @@
                                         </h3>
                                         <p class="price">R$ {{ produto.valor|floatformat:2 }}</p>
                                         <p class="buttons">
-                                            <a href="{% url 'produto' produto.pk %}" class="btn btn-default">Ver Detalhes</a>
-                                            <a href="#" class="btn btn-template-main">
+                                            <a href="{% url 'produto' produto.pk %}" class="btn btn-default">Ver
+                                                Detalhes</a>
+                                            <a href="{% url 'add_carrinho' produto.pk %}" class="btn btn-template-main">
                                                 <i class="fa fa-shopping-cart"></i>Adicionar ao Carrinho</a>
                                         </p>
                                     </div>
@@ -119,77 +121,85 @@
 
 
                 <div class="col-sm-3">
-
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Categorias</h3>
+                    {% if pedido %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h5><span class="glyphicon glyphicon-shopping-cart"></span> Carrinho
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        {% for item in pedido.item_set.all %}
+                                            <div class="row">
+                                                <div class="col-xs-2"><img src="{{ item.produto.foto_set.first }}"
+                                                                           style="width: 40px; height: 50px;">
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <h4 class="product-name">
+                                                        <strong>{{ item.produto.categoria }} {{ item.produto.nome }}</strong>
+                                                    </h4>
+                                                    <h4>
+                                                        <small><b>Qtd:</b>{{ item.quantidade }}</small>
+                                                    </h4>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <a href="{% url 'delete_carrinho' item.pk item.pedido.pk %}">
+                                                        <i class="fa fa-close"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="row text-center">
+                                            <div class="col-xs-12">
+                                                <a href="{% url 'carrinho' pedido.pk %}"
+                                                   class="btn btn-success btn-block">
+                                                    Fazer Pedido
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <br/>
+                    {% endif %}
+                    <div class="row">
+                        <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
-                                    <a href="shop-category.html">Men
-                                        <span class="badge pull-right">42</span>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="shop-category.html">T-shirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Shirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Pants</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="active">
-                                    <a href="shop-category.html">Ladies
-                                        <span class="badge pull-right">123</span>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="shop-category.html">T-shirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Skirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Pants</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="shop-category.html">Kids
-                                        <span class="badge pull-right">11</span>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="shop-category.html">T-shirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Skirts</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Pants</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Categorias</h3>
+                            </div>
 
-                            </ul>
-
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked category-menu">
+                                    <li>
+                                        {% for cat in categorias %}
+                                            <a href="{% url 'catalogo' %}?categoria={{ cat.id }}">{{ cat.nome }}
+                                                <span class="badge pull-right">{{ cat.tipo_set.all|length }}</span>
+                                            </a>
+                                            <ul>
+                                                {% for ti in cat.tipo_set.all %}
+                                                    <li>
+                                                        <a href="{% url 'catalogo' %}?tipo={{ ti.id }}">{{ ti.nome }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endfor %}
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
 
                     <!-- *** MENUS AND FILTERS END *** -->
 

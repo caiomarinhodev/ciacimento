@@ -34,6 +34,10 @@ class FormBaseAddress(BaseForm):
                                                                           'maxlength': 200,
                                                                           'placeholder': 'Bairro'
                                                                           }))
+    cidade = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': True,
+                                                                           'maxlength': 100,
+                                                                           'placeholder': 'Cidade'
+                                                                           }))
 
 
 class FormLogin(BaseForm):
@@ -97,9 +101,9 @@ class FormRegister(ModelForm, BaseForm):
 
 
 class FormEditCliente(ModelForm, BaseForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                               'maxlength': 200,
-                                                               'placeholder': 'Nome Estabelecimento'}))
+    nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                         'maxlength': 200,
+                                                         'placeholder': 'Nome Completo'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
                                                           'placeholder': 'Telefone'}))
@@ -115,6 +119,12 @@ class FormEditCliente(ModelForm, BaseForm):
                                                                            'maxlength': 100,
                                                                            'placeholder': 'Bairro'
                                                                            }))
+    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+                                                                          'maxlength': 200,
+                                                                          'placeholder': 'Cidade'
+                                                                          }))
+
+    email = forms.EmailField()
 
     class Meta:
         model = Cliente
@@ -136,6 +146,16 @@ class FormProduto(ModelForm, BaseForm):
         model = Produto
         fields = ['cod', 'nome', 'categoria', 'cor', 'peso', 'marca', 'valor', 'is_oferta', 'descricao', 'instrucoes',
                   'tipo_embalagem', ]
+
+
+class FormPedido(FormBaseAddress):
+    nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                         'maxlength': 200,
+                                                         'placeholder': 'Nome Estabelecimento'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                          'maxlength': 200,
+                                                          'placeholder': 'Telefone'}))
+    email = forms.EmailField()
 
 
 ItemFormSet = inlineformset_factory(Pedido, Item, form=FormItem, extra=1)

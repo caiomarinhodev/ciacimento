@@ -1,0 +1,137 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Carrinho</h1>
+                </div>
+                <div class="col-md-6">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>Carrinho</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted lead">Você tem {{ pedido.item_set.all|length }} item(s) em seu carrinho.</p>
+                </div>
+
+
+                <div class="col-md-10 col-md-offset-1 clearfix" id="basket">
+
+                    <div class="box">
+
+                        <form method="post" action="#">
+                            {% csrf_token %}
+
+                            <div class="table-responsive">
+                                {{ pontoset.management_form }}
+                                <table class="table">
+                                    {% for form in pontoset.forms %}
+                                        {% if forloop.first %}
+                                            <thead>
+                                            <tr>
+                                                {% for field in form.visible_fields %}
+                                                    <th>{{ field.label|capfirst }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                            </thead>
+                                        {% endif %}
+                                        <tbody>
+                                        <tr class="formset_row">
+                                            {% for field in form.visible_fields %}
+                                                <td>
+                                                    {# Include the hidden fields in the form #}
+                                                    {% if forloop.first %}
+                                                        {% for hidden in form.hidden_fields %}
+                                                            {{ hidden }}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {{ field.errors.as_ul }}
+                                                    {{ field }}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                        </tbody>
+                                    {% endfor %}
+                                    {#                                    {% for item in pedido.item_set.all %}#}
+                                    {#                                        <tr>#}
+                                    {#                                            <td>#}
+                                    {#                                                {{ item.id }}#}
+                                    {#                                            </td>#}
+                                    {#                                            <td>#}
+                                    {#                                                <a href="#">#}
+                                    {#                                                    <img src="{{ item.produto.foto_set.first }}"#}
+                                    {#                                                         alt="{{ item.produto }}">#}
+                                    {#                                                </a>#}
+                                    {#                                            </td>#}
+                                    {#                                            <td>#}
+                                    {#                                                <a href="#">{{ item.produto.categoria }} {{ item.produto.nome }} {{ item.produto.tipo }}</a>#}
+                                    {#                                            </td>#}
+                                    {#                                            <td>#}
+                                    {#                                                <input type="number" value="{{ item.quantidade }}" class="form-control">#}
+                                    {#                                            </td>#}
+                                    {#                                            <td>R$ {{ item.produto.valor }}</td>#}
+                                    {#                                            <td>R$ {{ item.valor_item }}</td>#}
+                                    {#                                            <td><a href="{% url 'delete_carrinho' item.pk item.pedido.pk %}"><i class="fa fa-trash-o"></i></a>#}
+                                    {#                                            </td>#}
+                                    {#                                        </tr>#}
+                                    {#                                    {% endfor %}#}
+
+                                    </tbody>
+                                </table>
+                                <script src="{% static 'js/jquery.formset.js' %}"></script>
+                                <script type="text/javascript">
+                                    $('.formset_row').formset({
+                                        addText: 'Adicionar Entrega',
+                                        deleteText: 'Remover',
+                                        prefix: 'ponto_set'
+                                    });
+                                    $('.add-row').addClass('btn btn-primary');
+                                    $('.add-row').addClass('hidden');
+                                </script>
+                            </div>
+                            <!-- /.table-responsive -->
+
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <a href="{% url 'catalogo' %}" class="btn btn-default"><i
+                                            class="fa fa-chevron-left"></i> Continuar Comprando</a>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-default"><i class="fa fa-refresh"></i>Atualizar Carrinho
+                                    </button>
+                                    <button type="submit" class="btn btn-template-main">Fazer Pedido<i
+                                            class="fa fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col-md-9 -->
+
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+{% endblock %}

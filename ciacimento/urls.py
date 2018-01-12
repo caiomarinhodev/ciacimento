@@ -6,7 +6,8 @@ from django.contrib.auth import views as auth_views
 from app.views.HomeView import HomeView
 # from app.views.LoginView import LoginView, LogoutView, RegisterView, EditarPerfilView, RegisterMotoristaView
 from app.views.LoginView import LoginView, LogoutView, submit_message
-from app.views.LojaView import ListProducts, ProductDetail
+from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
+    ProcessPedidoView
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017, LES-UFCG"
@@ -36,7 +37,11 @@ urlpatterns = [
     url(r'^submit-contact', submit_message, name='submit_contact'),
     url(r'^catalogo/$', ListProducts.as_view(), name='catalogo'),
     url(r'^produto/(?P<pk>[0-9]+)/$', ProductDetail.as_view(), name='produto'),
+    url(r'^add-carrinho/(?P<id_produto>[0-9]+)/$', add_item_carrinho, name='add_carrinho'),
+    url(r'^pedido/(?P<pk>[0-9]+)/$', CarrinhoView.as_view(), name='carrinho'),
+    url(r'^remove-carrinho/(?P<id_item>[0-9]+)/(?P<id_pedido>[0-9]+)/$', remove_item_carrinho,
+        name='delete_carrinho'),
 
-    # url(r'^app/perfil/edit/$', EditarPerfilView.as_view(), name="edit_perfil_view"),
+    url(r'^checkout/(?P<pk>[0-9]+)/$', ProcessPedidoView.as_view(), name='checkout'),
 
 ]

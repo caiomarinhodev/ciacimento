@@ -73,6 +73,11 @@ _________________________________________________________ -->
                         <li id="contact" class="">
                             <a href="{% url 'home' %}#contato">Contato</a>
                         </li>
+                        <li id="" class="">
+                            {% if pedido.pk %}
+                                <a href="{% url 'carrinho' pedido.pk %}" class="fa fa-shopping-cart"> {{ pedido.item_set.all|length }} - Itens </a>
+                            {% endif %}
+                        </li>
                     </ul>
 
                 </div>

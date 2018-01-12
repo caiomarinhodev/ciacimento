@@ -20,6 +20,7 @@ class BaseAddress(models.Model):
         abstract = True
 
     bairro = models.CharField(max_length=200, blank=True, null=True, verbose_name='Bairro')
+    cidade = models.CharField(max_length=100, blank=True, null=True, verbose_name='Cidade')
     endereco = models.CharField(max_length=200, blank=True, null=True, verbose_name='Endereço')
     numero = models.CharField(max_length=5, blank=True, null=True, verbose_name='Número')
     complemento = models.CharField(max_length=300, blank=True, null=True, verbose_name='Ponto de Referência')
@@ -38,13 +39,15 @@ class Usuario(TimeStamped):
 class Cliente(TimeStamped, BaseAddress):
     # user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     # cpf = models.CharField(max_length=100, blank=True, null=True, default="")
+    nome = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(max_length=100, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.CharField(max_length=200, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
-        self.full_address = address
         try:
+            address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
+            self.full_address = address
             pto = geocode(address)
             self.lat = pto['latitude']
             self.lng = pto['longitude']
@@ -62,6 +65,7 @@ class Categoria(TimeStamped):
 
 class Tipo(TimeStamped):
     nome = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, blank=True, null=True)
 
     def __unicode__(self):
         return u'%s' % (self.nome)
@@ -99,16 +103,21 @@ class Produto(TimeStamped):
 class Pedido(TimeStamped):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # USER
     valor_total = models.CharField(max_length=100, blank=True, null=True)
+    is_read = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'%s %s' % (self.cliente, self.valor_total)
 
     def save(self, *args, **kwargs):
-        valor = 0.00
-        for it in self.item_set.all():
-            if it.valor_item:
-                it.valor_item = valor + float(it.valor_item)
-        self.valor_total = valor
+        try:
+            valor = 0.00
+            for it in self.item_set.all():
+                if it.valor_item:
+                    it.valor_item = valor + float(it.valor_item)
+            self.valor_total = valor
+        except (Exception,):
+            pass
         super(Pedido, self).save(*args, **kwargs)
 
 
@@ -130,11 +139,14 @@ class Item(TimeStamped):
         return u'%s - %s' % (self.produto, self.quantidade)
 
     def save(self, *args, **kwargs):
-        valor = 0.00
-        if self.valor_item:
-            self.valor_item = float(self.produto.valor) * float(self.quantidade)
-        else:
-            self.valor_item = valor
+        try:
+            valor = 0.00
+            if self.produto.valor:
+                self.valor_item = float(self.produto.valor) * float(self.quantidade)
+            else:
+                self.valor_item = valor
+        except (Exception, ):
+            pass
         super(Item, self).save(*args, **kwargs)
 
 
