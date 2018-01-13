@@ -43,7 +43,7 @@
                                 <div class="product">
                                     <div class="image">
                                         <a href="{% url 'produto' produto.pk %}">
-                                            <img src="{{ produto.foto_set.first }}" alt=""
+                                            <img src="{{ produto.foto_set.first.url }}" alt=""
                                                  class="img-responsive image1">
                                         </a>
                                     </div>
@@ -138,7 +138,7 @@
                                     <div class="panel-body">
                                         {% for item in pedido.item_set.all %}
                                             <div class="row">
-                                                <div class="col-xs-2"><img src="{{ item.produto.foto_set.first }}"
+                                                <div class="col-xs-2"><img src="{{ item.produto.foto_set.first.url }}"
                                                                            style="width: 40px; height: 50px;">
                                                 </div>
                                                 <div class="col-xs-8">

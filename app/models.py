@@ -33,7 +33,10 @@ class Usuario(TimeStamped):
     is_gerente = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'%s - %s' % (self.user)
+        return u'%s' % (self.user)
+
+    def __str__(self):
+        return u'%s' % (self.user)
 
 
 class Cliente(TimeStamped, BaseAddress):
@@ -55,11 +58,17 @@ class Cliente(TimeStamped, BaseAddress):
             pass
         super(Cliente, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return u'%s' % (self.nome)
+
 
 class Categoria(TimeStamped):
     nome = models.CharField(max_length=100)
 
     def __unicode__(self):
+        return u'%s' % (self.nome)
+
+    def __str__(self):
         return u'%s' % (self.nome)
 
 
@@ -70,6 +79,9 @@ class Tipo(TimeStamped):
     def __unicode__(self):
         return u'%s' % (self.nome)
 
+    def __str__(self):
+        return u'%s' % (self.nome)
+
 
 class Marca(TimeStamped):
     nome = models.CharField(max_length=100)
@@ -78,6 +90,9 @@ class Marca(TimeStamped):
     foto = models.URLField(blank=True, null=True)
 
     def __unicode__(self):
+        return u'%s' % (self.nome)
+
+    def __str__(self):
         return u'%s' % (self.nome)
 
 
@@ -99,6 +114,9 @@ class Produto(TimeStamped):
     def __unicode__(self):
         return u'%s - %s' % (self.nome, self.marca)
 
+    def __str__(self):
+        return u'%s - %s' % (self.nome, self.marca)
+
 
 class Pedido(TimeStamped):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # USER
@@ -108,6 +126,9 @@ class Pedido(TimeStamped):
 
     def __unicode__(self):
         return u'%s %s' % (self.cliente, self.valor_total)
+
+    def __str__(self):
+        return u'%s %s' % (self.nome, self.valor_total)
 
     def save(self, *args, **kwargs):
         try:
@@ -128,6 +149,9 @@ class Foto(TimeStamped):
     def __unicode__(self):
         return u'%s' % (self.url)
 
+    def __str__(self):
+        return u'%s' % (self.url)
+
 
 class Item(TimeStamped):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
@@ -138,6 +162,9 @@ class Item(TimeStamped):
     def __unicode__(self):
         return u'%s - %s' % (self.produto, self.quantidade)
 
+    def __str__(self):
+        return u'%s - %s' % (self.produto, self.quantidade)
+
     def save(self, *args, **kwargs):
         try:
             valor = 0.00
@@ -145,7 +172,7 @@ class Item(TimeStamped):
                 self.valor_item = float(self.produto.valor) * float(self.quantidade)
             else:
                 self.valor_item = valor
-        except (Exception, ):
+        except (Exception,):
             pass
         super(Item, self).save(*args, **kwargs)
 

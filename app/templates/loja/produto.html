@@ -41,7 +41,7 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <img src="{{ produto.foto_set.first }}" alt="" class="img-responsive">
+                                <img src="{{ produto.foto_set.first.url }}" alt="" class="img-responsive">
                             </div>
 
                             <div class="ribbon sale">
@@ -288,7 +288,7 @@
                                     <div class="panel-body">
                                         {% for item in pedido.item_set.all %}
                                             <div class="row">
-                                                <div class="col-xs-2"><img src="{{ item.produto.foto_set.first }}"
+                                                <div class="col-xs-2"><img src="{{ item.produto.foto_set.first.url }}"
                                                                            style="width: 40px; height: 50px;">
                                                 </div>
                                                 <div class="col-xs-8">
