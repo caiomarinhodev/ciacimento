@@ -48,13 +48,13 @@
         {% if message.tags == 'error' %}
             <script>
                 $(document).ready(function () {
-                    swal("Error", "{{ message }}", "error")
+                    swal("Erro", "{{ message }}", "error")
                 });
             </script>
         {% else %}
             <script>
                 $(document).ready(function () {
-                    swal("Success", "{{ message|safe }}", "success")
+                    swal("Sucesso", "{{ message|safe }}", "success")
                 });
             </script>
         {% endif %}
