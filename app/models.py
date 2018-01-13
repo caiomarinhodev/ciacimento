@@ -128,7 +128,7 @@ class Pedido(TimeStamped):
         return u'%s %s' % (self.cliente, self.valor_total)
 
     def __str__(self):
-        return u'%s %s' % (self.nome, self.valor_total)
+        return u'%s %s' % (self.cliente, self.valor_total)
 
     def save(self, *args, **kwargs):
         try:
