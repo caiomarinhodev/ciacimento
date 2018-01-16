@@ -1,0 +1,152 @@
+{% extends 'vendedor/base_vendedor.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% include 'loading.html' %}
+
+    <div class="box box-primary" style="margin-top: 30px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                <center style="font-size: 20px;">Editar Pedido</center>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="" method="post">{% csrf_token %}
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Nome Completo</label>
+                            {{ forms.nome }}
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="street">Endereço</label>
+                            {{ forms.endereco }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="street">Número</label>
+                            {{ forms.numero }}
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="city">Bairro</label>
+                            {{ forms.bairro }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="zip">Cidade</label>
+                            {{ forms.cidade }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            {{ forms.phone }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            {{ forms.email }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Valor Total</label>
+                            {{ form.valor_total }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Valor Entrega</label>
+                            {{ form.valor_entrega }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            {{ pontoset.management_form }}
+                            {% for form in pontoset.forms %}
+                                {% if forloop.first %}
+                                    <thead>
+                                    <tr>
+                                        {% for field in form.visible_fields %}
+                                            <th>{{ field.label|capfirst }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                {% endif %}
+                                <tr class="formset_row">
+                                    {% for field in form.visible_fields %}
+                                        <td>
+                                            {# Include the hidden fields in the form #}
+                                            {% if forloop.first %}
+                                                {% for hidden in form.hidden_fields %}
+                                                    {{ hidden }}
+                                                {% endfor %}
+                                            {% endif %}
+                                            {{ field.errors.as_ul }}
+                                            {{ field }}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <script src="{% static 'js/jquery.formset.js' %}"></script>
+                    <script type="text/javascript">
+                        $('.formset_row').formset({
+                            addText: 'Adicionar Item',
+                            deleteText: 'Remover',
+                            prefix: 'ponto_set'
+                        });
+                    </script>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class=" box-footer ">
+                <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
+                <button type="submit" id="btn_salvar" class="btn btn-primary pull-right">Finalizar Pedido
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(":input").inputmask();
+            $('#body').addClass('sidebar-collapse');
+            $('#pedidos').addClass('active');
+            $('#btn_cancelar').click(function () {
+                return window.history.back();
+            });
+            $('.numero').inputmask('99999');
+            $('.telefone').inputmask('(99) [9]99999999');
+            $('.add-row').click(function () {
+                $(":input").inputmask();
+                $('.numero').inputmask('99999');
+                $('.telefone').inputmask('(99) [9]99999999');
+            });
+        });
+    </script>
+
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script>
+        $('.add-row').addClass('btn btn-primary');
+    </script>
+    {% include 'includes/script_message_notify.html' %}
+
+{% endblock %}

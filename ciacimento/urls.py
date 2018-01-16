@@ -8,6 +8,8 @@ from app.views.HomeView import HomeView
 from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
     ProcessPedidoView
+from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView
+from app.views.PainelVendedor import PedidoCreateVendedorView
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017, LES-UFCG"
@@ -43,5 +45,10 @@ urlpatterns = [
         name='delete_carrinho'),
 
     url(r'^checkout/(?P<pk>[0-9]+)/$', ProcessPedidoView.as_view(), name='checkout'),
+
+    url(r'^app/pedidos/vendedor/$', ListPedidosVendedor.as_view(), name='pedidos_vendedor'),
+    url(r'^app/pedidos/vendedor/add/$', PedidoCreateVendedorView.as_view(), name='add_pedido_vendedor'),
+    url(r'^app/pedido/(?P<pk>[0-9]+)/edit/$', PedidoUpdateVendedorView.as_view(), name="edit_pedido_vendedor"),
+    url(r'^app/pedido/(?P<pk>[0-9]+)/view/$', PedidoDetailVendedorView.as_view(), name="view_pedido_vendedor"),
 
 ]

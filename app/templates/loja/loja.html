@@ -52,7 +52,7 @@
                                         <h3>
                                             <a href="{% url 'produto' produto.pk %}">{{ produto.nome }} {{ produto.marca }} {{ produto.peso }}</a>
                                         </h3>
-                                        <p class="price">R$ {{ produto.valor|floatformat:2 }}</p>
+{#                                        <p class="price">R$ {{ produto.valor|floatformat:2 }}</p>#}
                                         <p class="buttons">
                                             <a href="{% url 'produto' produto.pk %}" class="btn btn-default">Ver
                                                 Detalhes</a>

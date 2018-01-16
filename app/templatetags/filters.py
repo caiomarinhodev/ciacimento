@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from django import template
 
+from app.models import Pedido
 from app.views.geocoding import calculate_matrix_distance
 
 register = template.Library()
@@ -40,3 +41,40 @@ def get_longitude(motorista):
         return motorista.user.location_set.all().order_by('-created_at').last().lng
     except (ValueError, ZeroDivisionError, Exception):
         return 0.0
+
+
+@register.filter
+def pedidos_vendedor_hoje(user):
+    try:
+        now = datetime.now()
+        return Pedido.objects.filter(vendedor__user=user, created_at__day=now.day)
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_vendedor_semana(user):
+    try:
+        now = datetime.now()
+        start_date = now - timedelta(days=6)
+        end_date = now
+        return Pedido.objects.filter(vendedor__user=user, created_at__range=(start_date, end_date))
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_vendedor_mes(user):
+    try:
+        now = datetime.now()
+        return Pedido.objects.filter(vendedor__user=user, created_at__month=now.month)
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_vendedor_total(user):
+    try:
+        return Pedido.objects.filter(vendedor__user=user)
+    except (Exception,):
+        return None

@@ -49,11 +49,26 @@ class LoginView(FormView):
             user = User.objects.get(id=self.request.user.id)
         except(Exception,):
             user = None
-        print(user.is_superuser)
-        if user.is_superuser:
-            url = '/admin/'  # Eh Gerente
-        else:
-            url = '/'  # Eh Vendedor
+
+        vendedor = None
+        cliente = None
+        try:
+            vendedor = user.vendedor
+        except (Exception, ):
+            pass
+        try:
+            cliente = user.cliente
+        except (Exception, ):
+            pass
+
+        if vendedor:
+            url = '/app/pedidos/vendedor'
+        elif cliente:
+            url = ''
+        else: # eh gerente
+            url = '/admin'
+            if user.is_superuser:
+                url = '/admin/'  # Eh Gerente
         return url
 
 

@@ -28,22 +28,8 @@ class BaseAddress(models.Model):
     lng = models.CharField(max_length=100, blank=True, null=True)
 
 
-class Usuario(TimeStamped):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    is_gerente = models.BooleanField(default=False)
-
-    def __unicode__(self):
-        return u'%s' % (self.user)
-
-    def __str__(self):
-        return u'%s' % (self.user)
-
-
 class Cliente(TimeStamped, BaseAddress):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    # cpf = models.CharField(max_length=100, blank=True, null=True, default="")
-    nome = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(max_length=100, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.CharField(max_length=200, blank=True, null=True)
 
@@ -59,7 +45,31 @@ class Cliente(TimeStamped, BaseAddress):
         super(Cliente, self).save(*args, **kwargs)
 
     def __str__(self):
-        return u'%s' % (self.nome)
+        return u'%s' % (self.user.first_name)
+
+
+class Vendedor(TimeStamped, BaseAddress):
+    class Meta:
+        verbose_name = 'Vendedor'
+        verbose_name_plural = 'Vendedores'
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
+    full_address = models.CharField(max_length=200, blank=True, null=True)
+
+    # def save(self, *args, **kwargs):
+    #     try:
+    #         address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
+    #         self.full_address = address
+    #         pto = geocode(address)
+    #         self.lat = pto['latitude']
+    #         self.lng = pto['longitude']
+    #     except (Exception,):
+    #         pass
+    #     super(Vendedor, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return u'%s' % (self.user.first_name)
 
 
 class Categoria(TimeStamped):
@@ -119,8 +129,10 @@ class Produto(TimeStamped):
 
 
 class Pedido(TimeStamped):
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # USER
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)  # USER
+    vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE, blank=True, null=True)
     valor_total = models.CharField(max_length=100, blank=True, null=True)
+    valor_entrega = models.CharField(max_length=100, blank=True, null=True)
     is_read = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
 
@@ -131,14 +143,8 @@ class Pedido(TimeStamped):
         return u'%s %s' % (self.cliente, self.valor_total)
 
     def save(self, *args, **kwargs):
-        try:
-            valor = 0.00
-            for it in self.item_set.all():
-                if it.valor_item:
-                    it.valor_item = valor + float(it.valor_item)
-            self.valor_total = valor
-        except (Exception,):
-            pass
+        self.valor_total = str(self.valor_total).replace(',', '.')
+        self.valor_entrega = str(self.valor_entrega).replace(',', '.')
         super(Pedido, self).save(*args, **kwargs)
 
 
@@ -154,6 +160,10 @@ class Foto(TimeStamped):
 
 
 class Item(TimeStamped):
+    class Meta:
+        verbose_name = 'Iten'
+        verbose_name_plural = 'Itens'
+
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.CharField(max_length=100)
     valor_item = models.CharField(max_length=100, blank=True, null=True)
@@ -172,6 +182,7 @@ class Item(TimeStamped):
                 self.valor_item = float(self.produto.valor) * float(self.quantidade)
             else:
                 self.valor_item = valor
+            self.pedido.save()
         except (Exception,):
             pass
         super(Item, self).save(*args, **kwargs)
@@ -184,6 +195,10 @@ type_notification = (
 
 
 class Notification(TimeStamped):
+    class Meta:
+        verbose_name = 'Notificacao'
+        verbose_name_plural = 'Notificacoes'
+
     message = models.TextField()
     to = models.ForeignKey(User, on_delete=models.CASCADE)
     type_message = models.CharField(choices=type_notification, max_length=100)

@@ -45,13 +45,13 @@
                             </div>
 
                             <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
+                                <div class="theribbon">{{ produto.categoria.nome }}</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <!-- /.ribbon -->
+{#                            <!-- /.ribbon -->#}
 
                             <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
+                                <div class="theribbon">{{ produto.tipo.nome }}</div>
                                 <div class="ribbon-background"></div>
                             </div>
                             <!-- /.ribbon -->
@@ -87,7 +87,7 @@
                                         </label>
                                     </div>
 
-                                    <p class="price">R$ {{ produto.valor|floatformat:2 }}</p>
+{#                                    <p class="price">R$ {{ produto.valor|floatformat:2 }}</p>#}
 
                                     <p class="text-center">
                                         <a href="{% url 'add_carrinho' produto.pk %}" class="btn btn-template-main"><i

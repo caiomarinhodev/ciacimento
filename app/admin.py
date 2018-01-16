@@ -64,6 +64,11 @@ class MessageAdmin(admin.ModelAdmin):
 class TipoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'id',)
 
+
+class VendedorAdmin(admin.ModelAdmin):
+    list_display = ('user', 'id',)
+
+
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
@@ -74,3 +79,4 @@ admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(Tipo, TipoAdmin)
+admin.site.register(Vendedor, VendedorAdmin)
