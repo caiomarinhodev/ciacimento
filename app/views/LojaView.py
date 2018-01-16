@@ -55,7 +55,7 @@ def add_item_carrinho(request, id_produto):
         item.save()
         messages.success(request, 'Item adicionado com sucesso')
     else:
-        username = 'usuario-' + str(uuid.uuid4()[:8])
+        username = 'usuario-' + str(uuid.uuid3())
         usuario = User(username=username, password='usuario')
         usuario.save()
         cliente = Cliente(user=usuario)

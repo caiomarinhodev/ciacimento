@@ -48,7 +48,7 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
                 pontoset.save()
         pedido = self.object
         data = self.request.POST
-        username = 'usuario-' + str(uuid.uuid4()[:8])
+        username = 'usuario-' + str(uuid.uuid3())
         usuario = User(username=username, password='usuario', first_name=data['nome'], email=data['email'])
         usuario.save()
         cliente = Cliente(user=usuario)
@@ -125,7 +125,7 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
             usuario.save()
             cliente = usuario.cliente
         except (Exception,):
-            username = 'usuario-' + str(uuid.uuid4()[:8])
+            username = 'usuario-' + str(uuid.uuid3())
             usuario = User(username=username, password='usuario', first_name=data['nome'], email=data['email'])
             usuario.save()
             cliente = Cliente(user=usuario)
