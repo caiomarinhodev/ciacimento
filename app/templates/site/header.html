@@ -1,4 +1,20 @@
 {% load staticfiles %}
+<style>
+    @media (min-width: 650px) {
+        .logtype {
+            max-width: 300px;
+            max-height: 55px;
+        }
+    }
+
+    @media (max-width: 649px) {
+        .logtype {
+            max-width: 239px;
+            max-height: 55px;
+        }
+    }
+
+</style>
 <header>
     <div id="top">
         <div class="container">
@@ -45,7 +61,10 @@ _________________________________________________________ -->
                 <div class="navbar-header">
 
                     <a class="navbar-brand home" href="/">
-                        <h1 style="margin-top: 2px;"> CIA DO CIMENTO</h1>
+                        <span id="logo_1"><img src='{% static 'img/title-cia.png' %}' class="logtype"
+                                               alt="logo"/>
+                        </span>
+                        {#                        <h1 style="margin-top: 2px;"> CIA DO CIMENTO</h1>#}
                     </a>
 
                     <div class="navbar-buttons">
@@ -75,7 +94,8 @@ _________________________________________________________ -->
                         </li>
                         <li id="" class="">
                             {% if pedido.pk %}
-                                <a href="{% url 'carrinho' pedido.pk %}" class="fa fa-shopping-cart"> {{ pedido.item_set.all|length }} - Itens </a>
+                                <a href="{% url 'carrinho' pedido.pk %}"
+                                   class="fa fa-shopping-cart"> {{ pedido.item_set.all|length }} - Itens </a>
                             {% endif %}
                         </li>
                     </ul>
