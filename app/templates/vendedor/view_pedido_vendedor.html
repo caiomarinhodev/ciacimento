@@ -111,7 +111,11 @@
             </div>
             <!-- /.box-body -->
             <div class=" box-footer ">
-                <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
+                {% if user.vendedor %}
+                    <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
+                {% else %}
+                    <a href="{% url 'pedidos_gerente' %}" id="btn_cancel" class="btn btn-default pull-left">Voltar</a>
+                {% endif %}
                 <a href="{% url 'edit_pedido_vendedor' object.id %}" class="btn btn-primary pull-right">Editar
                     Pedido</a>
             </div>

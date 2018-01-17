@@ -66,8 +66,13 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
         # message = "Um novo pedido foi feito pelo vendedor " + self.request.user.first_name
         # pedido = self.object
         # a = func()
-        # n = Notification(type_message='NOVO_PEDIDO_VENDEDOR', to=//, message=message)
-        # n.save()
+        if not self.request.user.is_superuser:
+            users = User.objects.filter(is_superuser=True)
+            for user in users:
+                message = "Um novo pedido foi feito pelo vendedor " + self.request.user.first_name
+                n = Notification(type_message='NOVO_PEDIDO_VENDEDOR', to=user, message=message)
+                print(user)
+                n.save()
         return super(PedidoCreateVendedorView, self).form_valid(form)
 
 
@@ -75,6 +80,15 @@ class PedidoDetailVendedorView(LoginRequiredMixin, DetailView):
     login_url = '/login/'
     model = Pedido
     template_name = 'vendedor/view_pedido_vendedor.html'
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        if user.is_superuser:
+            pedido = self.get_object()
+            if not pedido.is_read:
+                pedido.is_read = True
+                pedido.save()
+        return super(PedidoDetailVendedorView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         data = super(PedidoDetailVendedorView, self).get_context_data(**kwargs)

@@ -78,3 +78,40 @@ def pedidos_vendedor_total(user):
         return Pedido.objects.filter(vendedor__user=user)
     except (Exception,):
         return None
+
+
+@register.filter
+def pedidos_hoje(user):
+    try:
+        now = datetime.now()
+        return Pedido.objects.filter(created_at__day=now.day)
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_semana(user):
+    try:
+        now = datetime.now()
+        start_date = now - timedelta(days=6)
+        end_date = now
+        return Pedido.objects.filter(created_at__range=(start_date, end_date))
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_mes(user):
+    try:
+        now = datetime.now()
+        return Pedido.objects.filter(created_at__month=now.month)
+    except (Exception,):
+        return None
+
+
+@register.filter
+def pedidos_total(user):
+    try:
+        return Pedido.objects.all()
+    except (Exception,):
+        return None

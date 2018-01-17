@@ -8,6 +8,8 @@ from app.views.HomeView import HomeView
 from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
     ProcessPedidoView
+from app.views.NotificationView import notificar_novo_pedido_vendedor, notificar_novo_pedido_loja, NotificacoesListView
+from app.views.PainelGerente import ListPedidosGerente
 from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView
 from app.views.PainelVendedor import PedidoCreateVendedorView
 
@@ -31,8 +33,8 @@ Including another URLconf
 """
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^admin/login/$', auth_views.login),
+    url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^admin/login/$', auth_views.login, name='admin_login'),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^account/logout/$', LogoutView.as_view(), name='auth_logout'),
@@ -47,8 +49,13 @@ urlpatterns = [
     url(r'^checkout/(?P<pk>[0-9]+)/$', ProcessPedidoView.as_view(), name='checkout'),
 
     url(r'^app/pedidos/vendedor/$', ListPedidosVendedor.as_view(), name='pedidos_vendedor'),
+    url(r'^app/pedidos/gerente/$', ListPedidosGerente.as_view(), name='pedidos_gerente'),
     url(r'^app/pedidos/vendedor/add/$', PedidoCreateVendedorView.as_view(), name='add_pedido_vendedor'),
     url(r'^app/pedido/(?P<pk>[0-9]+)/edit/$', PedidoUpdateVendedorView.as_view(), name="edit_pedido_vendedor"),
     url(r'^app/pedido/(?P<pk>[0-9]+)/view/$', PedidoDetailVendedorView.as_view(), name="view_pedido_vendedor"),
+
+    url(r'^app/notificacoes/$', NotificacoesListView.as_view(), name='notificacoes'),
+    url(r'^notificacao/novo-pedido-vendedor/$', notificar_novo_pedido_vendedor, name="notify_novo_pedido_vendedor"),
+    url(r'^notificacao/novo-pedido-loja/$', notificar_novo_pedido_loja, name="notify_novo_pedido_loja"),
 
 ]

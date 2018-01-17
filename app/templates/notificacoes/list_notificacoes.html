@@ -1,4 +1,4 @@
-{% extends 'admin/../base_painel.html' %}
+{% extends 'vendedor/base_vendedor.html' %}
 {% load staticfiles %}
 {% load filters %}
 
@@ -30,14 +30,14 @@
                                             <td>{{ notificacao.id }}</td>
                                             <td>{{ notificacao.created_at|date:"d/m/Y G:i" }}</td>
                                             <td>
-                                                {% if notificacao.type_message == 'NOVO_PEDIDO' %}
+                                                {% if notificacao.type_message == 'NOVO_PEDIDO_VENDEDOR' %}
                                                     <label class="label label-info"><i
                                                             class=""></i>
-                                                        NOVO PEDIDO</label>
-                                                {% elif notificacao.type_message == 'DELETE_LOJA' %}
+                                                        NOVO PEDIDO VENDEDOR</label>
+                                                {% elif notificacao.type_message == 'NOVO_PEDIDO_LOJA' %}
                                                     <label class="label label-warning"><i
                                                             class=""></i>
-                                                        CANCELAMENTO</label>
+                                                        NOVO PEDIDO LOJA</label>
 
                                                 {% elif notificacao.type_message == 'CANCEL_ORDER' %}
                                                     <label class="label label-warning"><i
@@ -114,13 +114,12 @@
                 responsive: true,
                 order: [[1, "desc"]]
             });
-            setInterval(function () {
-                location.reload();
-            }, 60000);
+{#            setInterval(function () {#}
+{#                location.reload();#}
+{#            }, 60000);#}
             $('#notificacoes').addClass('active');
         });
 
     </script>
-    {% include 'includes/script_message_notify.html' %}
 
 {% endblock %}

@@ -11,7 +11,7 @@ from django.views.generic import UpdateView
 
 from app.forms import ItemFormUpdateSet, FormEditCliente
 from app.mixins.CustomContextMixin import CustomContextMixin
-from app.models import Produto, Categoria, Pedido, Cliente, Item
+from app.models import Produto, Categoria, Pedido, Cliente, Item, Notification
 
 
 class ListProducts(ListView, CustomContextMixin):
@@ -135,6 +135,11 @@ class ProcessPedidoView(UpdateView, CustomContextMixin):
             pedido.save()
             self.request.session['pedido'] = None
             del self.request.session['pedido']
+            users = User.objects.filter(is_superuser=True)
+            for us in users:
+                message = "Um novo pedido foi feito no Catalogo Virtual"
+                n = Notification(type_message='NOVO_PEDIDO_LOJA', to=us, message=message)
+                n.save()
         except (Exception,):
             return self.form_invalid(form)
         messages.success(self.request, "Pedido realizado com sucesso")

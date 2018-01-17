@@ -64,11 +64,11 @@ class LoginView(FormView):
         if vendedor:
             url = '/app/pedidos/vendedor'
         elif cliente:
-            url = ''
+            url = '/'
         else: # eh gerente
-            url = '/admin'
+            url = '/app/pedidos/gerente'
             if user.is_superuser:
-                url = '/admin/'  # Eh Gerente
+                url = '/app/pedidos/gerente'  # Eh Gerente
         return url
 
 

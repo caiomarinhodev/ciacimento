@@ -128,6 +128,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $(":input").inputmask();
+            $("input").addClass('form-control');
             $('#body').addClass('sidebar-collapse');
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {
@@ -147,6 +148,5 @@
     <script>
         $('.add-row').addClass('btn btn-primary');
     </script>
-    {% include 'includes/script_message_notify.html' %}
 
 {% endblock %}
