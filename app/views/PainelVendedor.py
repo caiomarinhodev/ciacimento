@@ -28,6 +28,11 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
     fields = ['valor_total', 'valor_entrega', ]
     template_name = 'vendedor/add_pedido_vendedor.html'
 
+    def get_success_url(self):
+        if self.request.user.is_superuser:
+            return '/app/pedidos/gerente'
+        return '/app/pedidos/vendedor'
+
     def get_context_data(self, **kwargs):
         data = super(PedidoCreateVendedorView, self).get_context_data(**kwargs)
         if self.request.POST:
@@ -109,6 +114,11 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
     fields = ['valor_total', 'valor_entrega', ]
     template_name = 'vendedor/edit_pedido_vendedor.html'
 
+    def get_success_url(self):
+        if self.request.user.is_superuser:
+            return '/app/pedidos/gerente'
+        return '/app/pedidos/vendedor'
+
     def get_context_data(self, **kwargs):
         data = super(PedidoUpdateVendedorView, self).get_context_data(**kwargs)
         if self.request.POST:
@@ -116,7 +126,8 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
             data['pontoset'] = ItemFormUpdateSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
             data['forms'] = FormEditCliente(instance=self.object.cliente,
-                                            initial={'nome': self.object.cliente.user.first_name, 'email': self.object.cliente.user.email})
+                                            initial={'nome': self.object.cliente.user.first_name,
+                                                     'email': self.object.cliente.user.email})
             data['pontoset'] = ItemFormUpdateSet(instance=self.object)
         return data
 
