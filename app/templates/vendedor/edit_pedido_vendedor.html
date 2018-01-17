@@ -111,7 +111,7 @@
                         $('.formset_row').formset({
                             addText: 'Adicionar Item',
                             deleteText: 'Remover',
-                            prefix: 'ponto_set'
+                            prefix: 'item_set'
                         });
                     </script>
                 </div>
@@ -119,7 +119,7 @@
             <!-- /.box-body -->
             <div class=" box-footer ">
                 <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
-                <button type="submit" id="btn_salvar" class="btn btn-primary pull-right">Finalizar Pedido
+                <button type="button" id="btn_salvar" class="btn btn-primary pull-right">Finalizar Pedido
                 </button>
             </div>
         </form>
@@ -127,6 +127,16 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#btn_salvar').click(function () {
+                if ($("select").filter(function () {
+                        return $.trim($(this).val()).length == 0
+                    }).length == 0) {
+                    $('form').submit();
+                }else{
+                    swal('Preencha todos os campos', 'Verifique se voce preencheu todos os campos ...' , 'error');
+                }
+            });
+
             $(":input").inputmask();
             $('#body').addClass('sidebar-collapse');
             $('#pedidos').addClass('active');
@@ -136,14 +146,12 @@
             $('.numero').inputmask('99999');
             $('.telefone').inputmask('(99) [9]99999999');
             $('.add-row').click(function () {
-                $(":input").inputmask();
                 $('.numero').inputmask('99999');
                 $('.telefone').inputmask('(99) [9]99999999');
             });
         });
     </script>
 
-    <script src="{% static 'js/jquery.formset.js' %}"></script>
     <script>
         $('.add-row').addClass('btn btn-primary');
     </script>
