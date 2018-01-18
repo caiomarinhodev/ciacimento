@@ -116,7 +116,14 @@
                                     <img src="{% static 'img/300x300.png' %}" class="user-image" alt="User Image">
                                 {% endif %}
                                 <p>
-                                    <small>Username: Administrador</small>
+                                    <small>
+                                        Username:
+                                        {% if user.vendedor %}
+                                            {{ user.first_name }}
+                                        {% else %}
+                                            Administrador
+                                        {% endif %}
+                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -150,7 +157,13 @@
                     {% endif %}
                 </div>
                 <div class="pull-left info">
-                    <p>Olá, Administrador</p>
+                    <p>Olá,
+                        {% if user.vendedor %}
+                            {{ user.first_name }}
+                        {% else %}
+                            Administrador
+                        {% endif %}
+                    </p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
