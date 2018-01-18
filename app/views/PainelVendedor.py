@@ -65,7 +65,10 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
         cliente.cidade = data['cidade']
         cliente.save()
         pedido.cliente = cliente
-        pedido.vendedor = Vendedor.objects.get(user=self.request.user)
+        try:
+            pedido.vendedor = Vendedor.objects.get(user=self.request.user)
+        except (Exception,):
+            pass
         pedido.save()
 
         # message = "Um novo pedido foi feito pelo vendedor " + self.request.user.first_name
