@@ -64,7 +64,8 @@ class LoginView(FormView):
         if vendedor:
             url = '/app/pedidos/vendedor'
         elif cliente:
-            url = '/'
+            messages.success(self.request, 'Usuario Logado com sucesso')
+            url = '/catalogo'
         else: # eh gerente
             url = '/app/pedidos/gerente'
             if user.is_superuser:

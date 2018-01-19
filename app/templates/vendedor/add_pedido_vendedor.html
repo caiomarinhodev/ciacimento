@@ -17,6 +17,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
+                            <label for="firstname">Login:</label>
+                            <p>(Tudo junto e minusculo)</p>
+                            {{ forms.login }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
                             <label for="firstname">Nome Completo:</label>
                             {{ forms.nome }}
                         </div>
@@ -145,7 +152,16 @@
     </div>
 
     <script type="text/javascript">
+
         $(document).ready(function () {
+
+            $('input').on('change keyup paste', function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('[name=login]').on('change keyup paste', function () {
+                $(this).val($(this).val().toLowerCase());
+            });
             $('#btn_salvar').click(function () {
                 if ($("select").filter(function () {
                         return $.trim($(this).val()).length == 0
@@ -173,6 +189,48 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('[name=login]').on('focusout', function () {
+                var query = $(this).val();
+                console.log(query);
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url 'buscar-cliente' %}',
+                    data: {q: query},
+                    beforeSend: function () {
+                        $('#loading').show();
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        console.table(result)
+                        $('#loading').hide();
+                        if (result.results.length == 0) {
+                            swal('Nenhum Usuario cadastrado com este login', '', 'error');
+                            $('[name=nome]').val('');
+                            $('[name=endereco]').val('');
+                            $('[name=numero]').val('');
+                            $('[name=bairro]').val('');
+                            $('[name=cidade]').val('');
+                            $('[name=phone]').val('');
+                            $('[name=email]').val('');
+                            return;
+                        } else {
+                            $('[name=nome]').val(result.results[0].nome);
+                            $('[name=endereco]').val(result.results[0].endereco);
+                            $('[name=numero]').val(result.results[0].numero);
+                            $('[name=bairro]').val(result.results[0].bairro);
+                            $('[name=cidade]').val(result.results[0].cidade);
+                            $('[name=phone]').val(result.results[0].phone);
+                            $('[name=email]').val(result.results[0].email);
+                        }
+                    }
+
+                });
+            });
+        });
+    </script>
+
 
     <script>
         $('.add-row').addClass('btn btn-primary');

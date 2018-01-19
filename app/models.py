@@ -45,7 +45,7 @@ class Cliente(TimeStamped, BaseAddress):
         super(Cliente, self).save(*args, **kwargs)
 
     def __str__(self):
-        return u'%s' % (self.user.first_name)
+        return u'%s - %s - %s/PB' % (self.user.first_name, self.phone, self.cidade)
 
 
 class Vendedor(TimeStamped, BaseAddress):
@@ -56,17 +56,6 @@ class Vendedor(TimeStamped, BaseAddress):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.CharField(max_length=200, blank=True, null=True)
-
-    # def save(self, *args, **kwargs):
-    #     try:
-    #         address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
-    #         self.full_address = address
-    #         pto = geocode(address)
-    #         self.lat = pto['latitude']
-    #         self.lng = pto['longitude']
-    #     except (Exception,):
-    #         pass
-    #     super(Vendedor, self).save(*args, **kwargs)
 
     def __str__(self):
         return u'%s' % (self.user.first_name)

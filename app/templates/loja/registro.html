@@ -1,0 +1,123 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+{% block content %}
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Registro</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>Registro</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <h2 class="text-uppercase">Nova Conta</h2>
+
+                        <p class="lead">Não possui conta em nosso sistema?</p>
+                        <p>Com a conta registrada você poderá efetuar solicitações de orçamento para nossa loja,
+                            que em tempo real receberá seu pedido, e o outro benefício da conta é que seus dados ficarão
+                            salvos
+                            evitando que você tenha que digitá-los toda vez que efetuar uma solicitação.</p>
+
+                        <hr>
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name-login">Nome</label>
+                                {{ form.nome }}
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Endereço</label>
+                                {{ form.endereco }}
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Número</label>
+                                {{ form.numero }}
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Bairro</label>
+                                {{ form.bairro }}
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Cidade</label>
+                                {{ form.cidade }}
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefone</label>
+                                {{ form.phone }}
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label for="email-login">Login</label>
+                                <p>(Tudo junto e minusculo)</p>
+                                {{ form.login }}
+                            </div>
+                            <div class="form-group">
+                                <label for="password-login">Senha</label>
+                                {{ form.senha }}
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i>
+                                    Registrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="box">
+                        <h2 class="text-uppercase">Login</h2>
+
+                        <p class="lead">Você já é nosso cliente?</p>
+                        <p class="text-muted">Então utilize o botão abaixo para entrar em nosso sistema e efetuar
+                            uma nova solicitação de orçamento.</p>
+
+                        <hr>
+
+                        <a href="{% url 'login' %}" class="btn btn-default btn-block">Ir para Login</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+
+    <script>
+
+        $(document).ready(function () {
+            $('input').on('change keyup paste', function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('[name=login]').on('change keyup paste', function () {
+                $(this).val($(this).val().toLowerCase());
+            });
+        });
+
+    </script>
+
+{% endblock %}

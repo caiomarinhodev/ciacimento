@@ -100,7 +100,7 @@ class FormRegister(ModelForm, BaseForm):
         fields = []
 
 
-class FormEditCliente(ModelForm, BaseForm):
+class FormRegisterCliente(ModelForm, BaseForm):
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                          'maxlength': 200,
                                                          'placeholder': 'Nome Completo'}))
@@ -125,6 +125,12 @@ class FormEditCliente(ModelForm, BaseForm):
                                                                           }))
 
     email = forms.EmailField()
+
+    login = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                          'maxlength': 200,
+                                                          'placeholder': 'Login'}))
+    senha = forms.CharField(widget=forms.PasswordInput(attrs={'required': True,
+                                                              'placeholder': 'Senha'}))
 
     class Meta:
         model = Cliente
@@ -156,6 +162,71 @@ class FormPedido(FormBaseAddress):
                                                           'maxlength': 200,
                                                           'placeholder': 'Telefone'}))
     email = forms.EmailField()
+
+
+class FormEditCliente(ModelForm, BaseForm):
+    nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                         'maxlength': 200,
+                                                         'placeholder': 'Nome Completo'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                          'maxlength': 200,
+                                                          'placeholder': 'Telefone'}))
+    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+                                                                            'maxlength': 200,
+                                                                            'placeholder': 'Endereço'
+                                                                            }))
+    numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
+                                                                         'maxlength': 200,
+                                                                         'placeholder': 'Número'
+                                                                         }))
+    bairro = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': True,
+                                                                           'maxlength': 100,
+                                                                           'placeholder': 'Bairro'
+                                                                           }))
+    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+                                                                          'maxlength': 200,
+                                                                          'placeholder': 'Cidade'
+                                                                          }))
+
+    email = forms.EmailField()
+
+    class Meta:
+        model = Cliente
+        fields = []
+
+
+class FormClientAddPedido(ModelForm, BaseForm):
+    login = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                          'maxlength': 200,
+                                                          'placeholder': 'Login'}))
+    nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                         'maxlength': 200,
+                                                         'placeholder': 'Nome Completo'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+                                                          'maxlength': 200,
+                                                          'placeholder': 'Telefone'}))
+    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+                                                                            'maxlength': 200,
+                                                                            'placeholder': 'Endereço'
+                                                                            }))
+    numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': True,
+                                                                         'maxlength': 200,
+                                                                         'placeholder': 'Número'
+                                                                         }))
+    bairro = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': True,
+                                                                           'maxlength': 100,
+                                                                           'placeholder': 'Bairro'
+                                                                           }))
+    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+                                                                          'maxlength': 200,
+                                                                          'placeholder': 'Cidade'
+                                                                          }))
+
+    email = forms.EmailField()
+
+    class Meta:
+        model = Cliente
+        fields = []
 
 
 ItemFormSet = inlineformset_factory(Pedido, Item, form=FormItem, extra=1)

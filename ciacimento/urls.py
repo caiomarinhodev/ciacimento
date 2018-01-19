@@ -4,13 +4,13 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 from app.views.HomeView import HomeView
-# from app.views.LoginView import LoginView, LogoutView, RegisterView, EditarPerfilView, RegisterMotoristaView
 from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
-    ProcessPedidoView
+    RegistroClienteView
 from app.views.NotificationView import notificar_novo_pedido_vendedor, notificar_novo_pedido_loja, NotificacoesListView
 from app.views.PainelGerente import ListPedidosGerente
-from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView
+from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView, \
+    buscar_cliente
 from app.views.PainelVendedor import PedidoCreateVendedorView
 
 __author__ = "Caio Marinho"
@@ -40,13 +40,14 @@ urlpatterns = [
     url(r'^account/logout/$', LogoutView.as_view(), name='auth_logout'),
     url(r'^submit-contact', submit_message, name='submit_contact'),
     url(r'^catalogo/$', ListProducts.as_view(), name='catalogo'),
+    url(r'^registro-login/$', RegistroClienteView.as_view(), name='registro_login'),
     url(r'^produto/(?P<pk>[0-9]+)/$', ProductDetail.as_view(), name='produto'),
     url(r'^add-carrinho/(?P<id_produto>[0-9]+)/$', add_item_carrinho, name='add_carrinho'),
     url(r'^pedido/(?P<pk>[0-9]+)/$', CarrinhoView.as_view(), name='carrinho'),
     url(r'^remove-carrinho/(?P<id_item>[0-9]+)/(?P<id_pedido>[0-9]+)/$', remove_item_carrinho,
         name='delete_carrinho'),
 
-    url(r'^checkout/(?P<pk>[0-9]+)/$', ProcessPedidoView.as_view(), name='checkout'),
+    url(r'^buscar-cliente/$', buscar_cliente, name='buscar-cliente'),
 
     url(r'^app/pedidos/vendedor/$', ListPedidosVendedor.as_view(), name='pedidos_vendedor'),
     url(r'^app/pedidos/gerente/$', ListPedidosGerente.as_view(), name='pedidos_gerente'),

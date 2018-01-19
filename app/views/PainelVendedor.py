@@ -3,12 +3,14 @@ import uuid
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db import transaction
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
 from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
-from app.forms import ItemFormSet, ItemFormUpdateSet, FormEditCliente
+from app.forms import ItemFormSet, ItemFormUpdateSet, FormEditCliente, FormClientAddPedido
 from app.models import Pedido, Notification, Cliente, Vendedor
 
 
@@ -20,6 +22,24 @@ class ListPedidosVendedor(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Pedido.objects.filter(vendedor__user=self.request.user)
+
+
+@require_http_methods(["GET"])
+def buscar_cliente(request):
+    q = request.GET['q']
+    qs = Cliente.objects.filter(user__username=q)
+    results = []
+    for cliente in qs:
+        results.append({
+            'id': cliente.pk,
+            'nome': cliente.user.first_name,
+            'endereco': cliente.endereco,
+            'numero': cliente.numero,
+            'bairro': cliente.bairro,
+            'cidade': cliente.cidade,
+            'phone': cliente.phone,
+            'email': cliente.user.email})
+    return JsonResponse({'results': results})
 
 
 class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
@@ -36,10 +56,10 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         data = super(PedidoCreateVendedorView, self).get_context_data(**kwargs)
         if self.request.POST:
-            data['forms'] = FormEditCliente(self.request.POST)
+            data['forms'] = FormClientAddPedido(self.request.POST)
             data['pontoset'] = ItemFormSet(self.request.POST)
         else:
-            data['forms'] = FormEditCliente()
+            data['forms'] = FormClientAddPedido()
             data['pontoset'] = ItemFormSet()
         return data
 
@@ -53,11 +73,20 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
                 pontoset.save()
         pedido = self.object
         data = self.request.POST
-        username = str(uuid.uuid4())[:8]
-        usuario = User(username=username, password='usuario', first_name=data['nome'], email=data['email'])
-        usuario.save()
-        cliente = Cliente(user=usuario)
-        cliente.save()
+        try:
+            cliente = Cliente.objects.get(user__username=data['login'])
+        except (Exception, ):
+            cliente = None
+        if not cliente:
+            user_data = {}
+            user_data['username'] = data['login']
+            user_data['password'] = data['login']
+            user_data['first_name'] = data['nome']
+            user_data['email'] = data['email']
+            usuario = User.objects.create_user(**user_data)
+            usuario.save()
+            cliente = Cliente(user=usuario)
+            cliente.save()
         cliente.phone = data['phone']
         cliente.endereco = data['endereco']
         cliente.numero = data['numero']
@@ -66,7 +95,8 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
         cliente.save()
         pedido.cliente = cliente
         try:
-            pedido.vendedor = Vendedor.objects.get(user=self.request.user)
+            vendedor = Vendedor.objects.get(user=self.request.user)
+            pedido.vendedor = vendedor
         except (Exception,):
             pass
         pedido.save()
