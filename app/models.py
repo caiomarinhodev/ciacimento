@@ -128,11 +128,30 @@ class Produto(TimeStamped):
         return u'%s - %s' % (self.nome, self.marca)
 
 
+type_entrega = (
+    ('COM DESCARREGO', 'COM DESCARREGO'),
+    ('SEM DESCARREGO', 'SEM DESCARREGO')
+)
+
+
+class FormaPagamento(TimeStamped):
+    forma = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.forma)
+
+    def __unicode__(self):
+        return '%s' % self.forma
+
+
 class Pedido(TimeStamped):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)  # USER
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE, blank=True, null=True)
-    valor_total = models.CharField(max_length=100, blank=True, null=True)
-    valor_entrega = models.CharField(max_length=100, blank=True, null=True)
+    formato_entrega = models.CharField(max_length=100, blank=True, null=True, choices=type_entrega)
+    data_entrega = models.DateField(blank=True, null=True)
+    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    valor_unitario = models.CharField(max_length=100, blank=True, null=True)
+    prazo = models.CharField(max_length=300, blank=True, null=True)
     is_read = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
 
@@ -143,8 +162,7 @@ class Pedido(TimeStamped):
         return u'%s %s' % (self.cliente, self.valor_total)
 
     def save(self, *args, **kwargs):
-        self.valor_total = str(self.valor_total).replace(',', '.')
-        self.valor_entrega = str(self.valor_entrega).replace(',', '.')
+        self.valor_unitario = str(self.valor_unitario).replace(',', '.')
         super(Pedido, self).save(*args, **kwargs)
 
 

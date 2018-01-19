@@ -279,17 +279,19 @@
         thissound.play();
     }
 </script>
-
+<script src="{% static 'plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js' %}" ></script>
 <script type="text/javascript">
     $(document).ready(function () {
 
 
-        {#        $('.datepicker').datepicker({#}
-        {#            clearBtn: true,#}
-        {#            format: 'yyyy-mm-dd',#}
-        {#            todayHighlight: true,#}
-        {#            autoclose: true#}
-        {#        });#}
+        $('.datepicker').datepicker({
+            clearBtn: true,
+            format: 'yyyy-mm-dd',
+{#            locale: 'pt-BR',#}
+            language: 'pt-BR',
+            todayHighlight: true,
+            autoclose: true
+        });
 
         $('[name=cep]').focusout(function () {
             $('#loading').show();

@@ -61,19 +61,6 @@
                             {{ forms.email }}
                         </div>
                     </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="firstname">Valor Total</label>
-                            {{ form.valor_total }}
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="firstname">Valor Entrega</label>
-                            {{ form.valor_entrega }}
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -115,6 +102,38 @@
                         });
                     </script>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Valor Unitário: </label>
+                            {{ form.valor_unitario }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Forma de Pagamento: </label>
+                            {{ form.forma_pagamento }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Metodo de Entrega: </label>
+                            {{ form.formato_entrega }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Data de Entrega: </label>
+                            {{ form.data_entrega }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Prazo: </label>
+                            {{ form.prazo }}
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.box-body -->
             <div class=" box-footer ">
@@ -132,12 +151,15 @@
                         return $.trim($(this).val()).length == 0
                     }).length == 0) {
                     $('form').submit();
-                }else{
-                    swal('Preencha todos os campos', 'Verifique se voce preencheu todos os campos ...' , 'error');
+                } else {
+                    swal('Preencha todos os campos', 'Verifique se voce preencheu todos os campos ...', 'error');
                 }
             });
 
             $(":input").inputmask();
+            $('select').addClass('form-control');
+            $('input').addClass('form-control');
+            $('[name=data_entrega]').addClass('datepicker');
             $('#body').addClass('sidebar-collapse');
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {

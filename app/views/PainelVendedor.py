@@ -25,7 +25,7 @@ class ListPedidosVendedor(LoginRequiredMixin, ListView):
 class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
     model = Pedido
     success_url = '/app/pedidos/vendedor/'
-    fields = ['valor_total', 'valor_entrega', ]
+    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega', ]
     template_name = 'vendedor/add_pedido_vendedor.html'
 
     def get_success_url(self):
@@ -114,7 +114,7 @@ class PedidoDetailVendedorView(LoginRequiredMixin, DetailView):
 class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
     model = Pedido
     success_url = '/app/pedidos/vendedor/'
-    fields = ['valor_total', 'valor_entrega', ]
+    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega', ]
     template_name = 'vendedor/edit_pedido_vendedor.html'
 
     def get_success_url(self):

@@ -46,7 +46,7 @@ class PedidoAdmin(admin.ModelAdmin):
     inlines = [
         ItemInline,
     ]
-    list_display = ('cliente', 'valor_total', 'created_at')
+    list_display = ('cliente', 'formato_entrega', 'valor_unitario', 'forma_pagamento', 'data_entrega', 'created_at')
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -59,6 +59,10 @@ class NotificationAdmin(admin.ModelAdmin):
 
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'message', 'email',)
+
+
+class FormaPagamentoAdmin(admin.ModelAdmin):
+    list_display = ('forma', 'id', 'created_at',)
 
 
 class TipoAdmin(admin.ModelAdmin):
@@ -80,3 +84,4 @@ admin.site.register(Item, ItemAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(Tipo, TipoAdmin)
 admin.site.register(Vendedor, VendedorAdmin)
+admin.site.register(FormaPagamento, FormaPagamentoAdmin)

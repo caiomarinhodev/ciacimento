@@ -142,7 +142,7 @@ class ProcessPedidoView(UpdateView, CustomContextMixin):
                 n.save()
         except (Exception,):
             return self.form_invalid(form)
-        messages.success(self.request, "Pedido realizado com sucesso")
+        messages.success(self.request, "Solicitacao de Orcamento realizado com sucesso")
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
