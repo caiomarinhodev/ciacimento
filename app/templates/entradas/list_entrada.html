@@ -1,0 +1,150 @@
+{% extends 'vendedor/base_vendedor.html' %}
+{% load filters %}
+{% load staticfiles %}
+
+{% block content %}
+
+    {#    <div class="row">#}
+    {#        <div class="col-lg-3 col-xs-6">#}
+    {#            <!-- small box -->#}
+    {#            <div class="small-box bg-aqua">#}
+    {#                <div class="inner">#}
+    {#                    <h3>{{ user|pedidos_vendedor_hoje|length }}</h3>#}
+    {##}
+    {#                    <p>Pedidos Hoje</p>#}
+    {#                </div>#}
+    {#                <div class="icon">#}
+    {#                    <i class="ion ion-person"></i>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <!-- ./col -->#}
+    {#        <div class="col-lg-3 col-xs-6">#}
+    {#            <!-- small box -->#}
+    {#            <div class="small-box bg-green">#}
+    {#                <div class="inner">#}
+    {#                    <h3>{{ user|pedidos_vendedor_semana|length }}</h3>#}
+    {##}
+    {#                    <p>Pedidos da Semana</p>#}
+    {#                </div>#}
+    {#                <div class="icon">#}
+    {#                    <i class="ion ion-stats-bars"></i>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <!-- ./col -->#}
+    {#        <div class="col-lg-3 col-xs-6">#}
+    {#            <!-- small box -->#}
+    {#            <div class="small-box bg-yellow">#}
+    {#                <div class="inner">#}
+    {#                    <h3>{{ user|pedidos_vendedor_mes|length }}</h3>#}
+    {##}
+    {#                    <p>Pedidos no Mês</p>#}
+    {#                </div>#}
+    {#                <div class="icon">#}
+    {#                    <i class="ion ion-paper-airplane"></i>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <!-- ./col -->#}
+    {#        <div class="col-lg-3 col-xs-6">#}
+    {#            <!-- small box -->#}
+    {#            <div class="small-box bg-red">#}
+    {#                <div class="inner">#}
+    {#                    <h3>{{ user|pedidos_vendedor_total|length }}</h3>#}
+    {##}
+    {#                    <p>Pedidos Total</p>#}
+    {#                </div>#}
+    {#                <div class="icon">#}
+    {#                    <i class="ion ion-clock"></i>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <!-- ./col -->#}
+    {#    </div>#}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <a href="{% url 'add_entrada' %}" class="btn btn-primary">Adicionar Entrada</a>
+                </div>
+                <!-- form start -->
+                <div class="box-body">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="table" class="table table-bordered table-striped" class="display"
+                                       cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CLIENTE</th>
+                                        <th>DATA</th>
+                                        <th>VALOR TOTAL</th>
+                                        <th>VALOR PAGO</th>
+                                        <th>FORMA</th>
+                                        <th>CRIADO EM</th>
+                                        <th>COR</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for entrada in entradas %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.id_pedido }}</a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.cliente }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.data }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.valor_total|floatformat:2 }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.valor_pago|floatformat:2 }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.forma_pagamento }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_entrada' entrada.id %}"> {{ entrada.created_at|date:"d/m/Y H:i" }} </a>
+                                            </td>
+
+                                            <td>
+                                                <label class="label" style="color: {{ entrada.cor }};background-color: {{ entrada.cor }}">{{ entrada.cor }}</label>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary btn-block"
+                                                   href="{% url 'edit_entrada' entrada.id %}">
+                                                    Ver Entrada
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table').DataTable({
+                responsive: true,
+                order: [[0, "desc"]]
+            });
+            $('#entradas').addClass('active');
+        });
+
+    </script>
+
+{% endblock %}

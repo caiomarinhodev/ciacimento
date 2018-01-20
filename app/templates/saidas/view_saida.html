@@ -1,0 +1,64 @@
+{% extends 'vendedor/base_vendedor.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% include 'loading.html' %}
+
+    <div class="box box-primary" style="margin-top: 30px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                <center style="font-size: 20px;">Visualizar Saida</center>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="" method="post">{% csrf_token %}
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {{ form.as_p }}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class=" box-footer ">
+                <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
+                <a href="{% url 'edit_saida' saida.pk %}" type="button" id="btn_salvar"
+                   class="btn btn-primary pull-right">Editar Saida
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('input').on('change keyup paste', function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('select').addClass('form-control');
+            $('[name=data_entrega]').addClass('datepicker');
+            $('input').addClass('form-control');
+            $('#body').addClass('sidebar-collapse');
+            $('#saidas').addClass('active');
+            $('#btn_cancelar').click(function () {
+                return window.history.back();
+            });
+            $('.numero').inputmask('99999');
+            $('.telefone').inputmask('(99) [9]99999999');
+            $('.add-row').click(function () {
+                $('.numero').inputmask('99999');
+                $('.telefone').inputmask('(99) [9]99999999');
+            });
+
+            $('input').addClass('readonly').attr('readonly', 'true');
+        });
+    </script>
+
+    <script>
+        $('.add-row').addClass('btn btn-primary');
+    </script>
+
+{% endblock %}

@@ -12,6 +12,8 @@ from app.views.PainelGerente import ListPedidosGerente
 from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView, \
     buscar_cliente
 from app.views.PainelVendedor import PedidoCreateVendedorView
+from app.views.EntradaView import *
+from app.views.SaidaView import *
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017, LES-UFCG"
@@ -58,5 +60,15 @@ urlpatterns = [
     url(r'^app/notificacoes/$', NotificacoesListView.as_view(), name='notificacoes'),
     url(r'^notificacao/novo-pedido-vendedor/$', notificar_novo_pedido_vendedor, name="notify_novo_pedido_vendedor"),
     url(r'^notificacao/novo-pedido-loja/$', notificar_novo_pedido_loja, name="notify_novo_pedido_loja"),
+
+    url(r'^app/entradas/$', EntradaListView.as_view(), name='list_entradas'),
+    url(r'^app/entradas/add/$', EntradaCreateView.as_view(), name='add_entrada'),
+    url(r'^app/entradas/(?P<pk>[0-9]+)/$', EntradaDetailView.as_view(), name='view_entrada'),
+    url(r'^app/entradas/(?P<pk>[0-9]+)/edit$', EntradaEditView.as_view(), name='edit_entrada'),
+
+    url(r'^app/saidas/$', SaidaListView.as_view(), name='list_saidas'),
+    url(r'^app/saidas/add/$', SaidaCreateView.as_view(), name='add_saida'),
+    url(r'^app/saidas/(?P<pk>[0-9]+)/$', SaidaDetailView.as_view(), name='view_saida'),
+    url(r'^app/saidas/(?P<pk>[0-9]+)/edit$', SaidaEditView.as_view(), name='edit_saida'),
 
 ]

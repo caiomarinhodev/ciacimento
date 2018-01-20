@@ -3,7 +3,7 @@
 from django import forms
 from django.forms import ModelForm, inlineformset_factory
 
-from app.models import Pedido, Item, Cliente, Marca, Produto
+from app.models import Pedido, Item, Cliente, Marca, Produto, Entrada, Saida
 
 
 class BaseForm(forms.Form):
@@ -152,6 +152,19 @@ class FormProduto(ModelForm, BaseForm):
         model = Produto
         fields = ['cod', 'nome', 'categoria', 'cor', 'peso', 'marca', 'valor', 'is_oferta', 'descricao', 'instrucoes',
                   'tipo_embalagem', ]
+
+
+class FormEntrada(ModelForm, BaseForm):
+    class Meta:
+        model = Entrada
+        fields = ['id_pedido', 'cliente', 'valor_total', 'valor_pago', 'data', 'forma_pagamento', 'observacoes',
+                  'cor', ]
+
+
+class FormSaida(ModelForm, BaseForm):
+    class Meta:
+        model = Saida
+        fields = ['eminente', 'razao', 'valor', 'forma', 'data', 'observacoes', 'cor', ]
 
 
 class FormPedido(FormBaseAddress):

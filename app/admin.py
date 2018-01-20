@@ -73,6 +73,15 @@ class VendedorAdmin(admin.ModelAdmin):
     list_display = ('user', 'id',)
 
 
+class EntradaAdmin(admin.ModelAdmin):
+    list_display = (
+        'cliente', 'id_pedido', 'valor_total', 'valor_pago', 'data', 'forma_pagamento', 'cor', 'created_at',)
+
+
+class SaidaAdmin(admin.ModelAdmin):
+    list_display = ('eminente', 'razao', 'valor', 'forma', 'data', 'observacoes', 'cor', 'created_at',)
+
+
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
@@ -85,3 +94,5 @@ admin.site.register(Message, MessageAdmin)
 admin.site.register(Tipo, TipoAdmin)
 admin.site.register(Vendedor, VendedorAdmin)
 admin.site.register(FormaPagamento, FormaPagamentoAdmin)
+admin.site.register(Entrada, EntradaAdmin)
+admin.site.register(Saida, SaidaAdmin)

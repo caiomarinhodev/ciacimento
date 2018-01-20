@@ -184,6 +184,18 @@
                         </a>
                     </li>
 
+                     <li id="entradas">
+                        <a href="{% url 'list_entradas' %}">
+                            <i class="fa fa-indent"></i> <span>Entradas</span>
+                        </a>
+                    </li>
+
+                     <li id="saidas">
+                        <a href="{% url 'list_saidas' %}">
+                            <i class="fa fa-dedent"></i> <span>Saidas</span>
+                        </a>
+                    </li>
+
                     <li id="admin">
                         <a href="{% url 'admin_login' %}" target="_blank">
                             <i class="fa fa-dashboard"></i> <span>Banco de Dados</span>
@@ -290,7 +302,7 @@
 
         $('.datepicker').datepicker({
             clearBtn: true,
-            format: 'yyyy-mm-dd',
+            format: 'dd/mm/yyyy',
             {#            locale: 'pt-BR',#}
             language: 'pt-BR',
             todayHighlight: true,

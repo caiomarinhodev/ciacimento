@@ -1,0 +1,72 @@
+{% extends 'vendedor/base_vendedor.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% include 'loading.html' %}
+
+    <div class="box box-primary" style="margin-top: 30px;">
+        <div class="box-header">
+            <h3 class="box-title">
+                <center style="font-size: 20px;">Adicionar Entrada</center>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form action="" method="post">{% csrf_token %}
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {{ form.as_p }}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class=" box-footer ">
+                <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
+                <button type="button" id="btn_salvar" class="btn btn-primary pull-right">Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('input').on('change keyup paste', function () {
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('#btn_salvar').click(function () {
+                if ($("input").filter(function () {
+                        return $.trim($(this).val()).length == 0
+                    }).length == 0) {
+                    $('form').submit();
+                } else {
+                    swal('Preencha todos os campos', 'Verifique se voce preencheu todos os campos ...', 'error');
+                }
+            });
+
+            $(":input").inputmask();
+            $('select').addClass('form-control');
+            $('[name=data]').addClass('datepicker');
+            $('input').addClass('form-control');
+            $('#body').addClass('sidebar-collapse');
+            $('#entradas').addClass('active');
+            $('#btn_cancelar').click(function () {
+                return window.history.back();
+            });
+            $('.numero').inputmask('99999');
+            $('.telefone').inputmask('(99) [9]99999999');
+            $('.add-row').click(function () {
+                $('.numero').inputmask('99999');
+                $('.telefone').inputmask('(99) [9]99999999');
+            });
+        });
+    </script>
+
+    <script>
+        $('.add-row').addClass('btn btn-primary');
+    </script>
+
+{% endblock %}

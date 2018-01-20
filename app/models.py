@@ -224,3 +224,52 @@ class Message(models.Model):
 
     def __unicode__(self):
         return u'%s - %s' % (self.name, self.email)
+
+
+colors = (
+    ('#001F3F', 'NAVY'),
+    ('#3c8dbc', 'AZUL'),
+    ('#00c0ef', 'AZUL-CLARO'),
+    ('#39CCCC', 'TURQUESA'),
+    ('#00a65a', 'VERDE'),
+    ('#605ca8', 'ROXO'),
+    ('#f39c12', 'AMARELO'),
+    ('#ff851b', 'LARANJA'),
+    ('#f56954', 'VERMELHO'),
+    ('#D81B60', 'ROSA'),
+    ('#d2d6de', 'CINZA'),
+    ('#111111', 'PRETO'),
+)
+
+
+class Entrada(TimeStamped):
+    cliente = models.CharField(max_length=300, blank=True, null=True)
+    id_pedido = models.CharField(max_length=100, blank=True, null=True)
+    valor_total = models.CharField(max_length=100, blank=True, null=True)
+    valor_pago = models.CharField(max_length=100, blank=True, null=True)
+    data = models.DateField(blank=True, null=True)
+    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    observacoes = models.TextField(blank=True, null=True)
+    cor = models.CharField(max_length=100, blank=True, null=True, choices=colors)
+
+    def __str__(self):
+        return str(self.id_pedido)
+
+    def __unicode__(self):
+        return '%s' % self.cliente
+
+
+class Saida(TimeStamped):
+    eminente = models.CharField(max_length=300, blank=True, null=True)
+    razao = models.CharField(max_length=300, blank=True, null=True)
+    valor = models.CharField(max_length=300, blank=True, null=True)
+    forma = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    data = models.DateField(blank=True, null=True)
+    observacoes = models.TextField(blank=True, null=True)
+    cor = models.CharField(max_length=100, blank=True, null=True, choices=colors)
+
+    def __unicode__(self):
+        return '%s' % self.eminente
+
+    def __str__(self):
+        return str(self.id_pedido)
