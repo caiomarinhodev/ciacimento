@@ -3054,7 +3054,7 @@ $.widget( "ui.autocomplete", {
 
 		// turning off autocomplete prevents the browser from remembering the
 		// value when navigating through history, so we re-enable autocomplete
-		// if the page is unloaded before the widget is destroyed. #7790
+		// if the login is unloaded before the widget is destroyed. #7790
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -4372,7 +4372,7 @@ $.extend(Datepicker.prototype, {
 				case 34: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
 							+$.datepicker._get(inst, "stepBigMonths") :
 							+$.datepicker._get(inst, "stepMonths")), "M");
-						break; // next month/year on page down/+ ctrl
+						break; // next month/year on login down/+ ctrl
 				case 35: if (event.ctrlKey || event.metaKey) {
 							$.datepicker._clearDate(event.target);
 						}
@@ -6013,7 +6013,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 				return $( this ).css( "position" ) === "fixed";
 			}).length > 0;
 
-		//The element's absolute position on the page minus margins
+		//The element's absolute position on the login minus margins
 		this.positionAbs = this.element.offset();
 		this._refreshOffsets( event );
 
@@ -9280,7 +9280,7 @@ $.ui.ddmanager = {
 	},
 	drag: function( draggable, event ) {
 
-		// If you have a highly dynamic page, you might try this option. It renders positions every time you move the mouse.
+		// If you have a highly dynamic login, you might try this option. It renders positions every time you move the mouse.
 		if ( draggable.options.refreshPositions ) {
 			$.ui.ddmanager.prepareOffsets( draggable, event );
 		}
@@ -13672,7 +13672,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 		//Get the next scrolling parent
 		this.scrollParent = this.helper.scrollParent();
 
-		//The element's absolute position on the page minus margins
+		//The element's absolute position on the login minus margins
 		this.offset = this.currentItem.offset();
 		this.offset = {
 			top: this.offset.top - this.margins.top,
@@ -14849,7 +14849,7 @@ var spinner = $.widget( "ui.spinner", {
 
 		// turning off autocomplete prevents the browser from remembering the
 		// value when navigating through history, so we re-enable autocomplete
-		// if the page is unloaded before the widget is destroyed. #7790
+		// if the login is unloaded before the widget is destroyed. #7790
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -15499,7 +15499,7 @@ var tabs = $.widget( "ui.tabs", {
 		}
 	},
 
-	// Alt+page up/down moves focus to the previous/next tab (and activates)
+	// Alt+login up/down moves focus to the previous/next tab (and activates)
 	_handlePageNav: function( event ) {
 		if ( event.altKey && event.keyCode === $.ui.keyCode.PAGE_UP ) {
 			this._activate( this._focusNextTab( this.options.active - 1, false ) );
