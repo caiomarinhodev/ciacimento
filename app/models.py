@@ -34,6 +34,8 @@ class Cliente(TimeStamped, BaseAddress):
     full_address = models.CharField(max_length=200, blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        self.numero = str(self.numero).replace('_', '')
+        self.phone = str(self.phone).replace('_', '')
         try:
             address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
             self.full_address = address

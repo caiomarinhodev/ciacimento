@@ -3,6 +3,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from app.views.ClientesView import ClientesGerenteListView
+from app.views.ClientesView import ClientesVendedorListView
 from app.views.HomeView import HomeView
 from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
@@ -60,6 +62,9 @@ urlpatterns = [
     url(r'^app/notificacoes/$', NotificacoesListView.as_view(), name='notificacoes'),
     url(r'^notificacao/novo-pedido-vendedor/$', notificar_novo_pedido_vendedor, name="notify_novo_pedido_vendedor"),
     url(r'^notificacao/novo-pedido-loja/$', notificar_novo_pedido_loja, name="notify_novo_pedido_loja"),
+
+    url(r'^app/clientes-gerente/$', ClientesGerenteListView.as_view(), name='list_clientes_gerente'),
+    url(r'^app/clientes-vendedor/$', ClientesVendedorListView.as_view(), name='list_clientes_vendedor'),
 
     url(r'^app/entradas/$', EntradaListView.as_view(), name='list_entradas'),
     url(r'^app/entradas/add/$', EntradaCreateView.as_view(), name='add_entrada'),

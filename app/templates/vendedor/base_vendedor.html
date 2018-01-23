@@ -177,10 +177,20 @@
                             <i class="fa fa-list-alt"></i> <span>Pedidos</span>
                         </a>
                     </li>
+                    <li id="clientes">
+                        <a href="{% url 'list_clientes_vendedor' %}">
+                            <i class="fa fa-user"></i> <span>Clientes</span>
+                        </a>
+                    </li>
                 {% else %}
                     <li id="pedidos">
                         <a href="{% url 'pedidos_gerente' %}">
                             <i class="fa fa-list-alt"></i> <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li id="clientes">
+                        <a href="{% url 'list_clientes_gerente' %}">
+                            <i class="fa fa-user"></i> <span>Clientes</span>
                         </a>
                     </li>
 
