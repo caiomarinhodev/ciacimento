@@ -10,7 +10,8 @@ from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
     RegistroClienteView
 from app.views.NotificationView import notificar_novo_pedido_vendedor, notificar_novo_pedido_loja, NotificacoesListView
-from app.views.PainelGerente import ListPedidosGerente
+from app.views.PainelGerente import ListPedidosGerente, ListPedidosMesGerente, ListPedidosSemanaGerente, \
+    ListPedidosHojeGerente
 from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView, \
     buscar_cliente
 from app.views.PainelVendedor import PedidoCreateVendedorView
@@ -75,5 +76,9 @@ urlpatterns = [
     url(r'^app/saidas/add/$', SaidaCreateView.as_view(), name='add_saida'),
     url(r'^app/saidas/(?P<pk>[0-9]+)/$', SaidaDetailView.as_view(), name='view_saida'),
     url(r'^app/saidas/(?P<pk>[0-9]+)/edit$', SaidaEditView.as_view(), name='edit_saida'),
+
+    url(r'^app/pedidos/mes/gerente/$', ListPedidosMesGerente.as_view(), name='pedidos_mes_g'),
+    url(r'^app/pedidos/semana/gerente/$', ListPedidosSemanaGerente.as_view(), name='pedidos_semana_g'),
+    url(r'^app/pedidos/hoje/gerente/$', ListPedidosHojeGerente.as_view(), name='pedidos_hoje_g'),
 
 ]

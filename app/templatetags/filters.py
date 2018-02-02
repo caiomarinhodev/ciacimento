@@ -115,3 +115,47 @@ def pedidos_total(user):
         return Pedido.objects.all()
     except (Exception,):
         return None
+
+
+@register.filter
+def quatidades_hoje(user):
+    try:
+        now = datetime.now()
+        list_pedidos = Pedido.objects.filter(created_at__day=now.day)
+        qtd = 0
+        for pedido in list_pedidos:
+            for item in pedido.item_set.all():
+                qtd = qtd + int(item.quantidade)
+        return qtd
+    except (Exception,):
+        return None
+
+
+@register.filter
+def quatidades_semana(user):
+    try:
+        now = datetime.now()
+        start_date = now - timedelta(days=6)
+        end_date = now
+        list_pedidos = Pedido.objects.filter(created_at__range=(start_date, end_date))
+        qtd = 0
+        for pedido in list_pedidos:
+            for item in pedido.item_set.all():
+                qtd += int(item.quantidade)
+        return qtd
+    except (Exception,):
+        return None
+
+
+@register.filter
+def quatidades_mes(user):
+    try:
+        now = datetime.now()
+        list_pedidos = Pedido.objects.filter(created_at__month=now.month, created_at__year=now.year)
+        qtd = 0
+        for pedido in list_pedidos:
+            for item in pedido.item_set.all():
+                qtd += int(item.quantidade)
+        return qtd
+    except (Exception,):
+        return None
