@@ -40,10 +40,10 @@
 
                     <div class="login">
                         {% if user.is_authenticated %}
-                        Olá, {{ user.first_name }} &nbsp;&nbsp;&nbsp;
+                            <a href="{% url 'notificacoes' %}"> Olá, {{ user.first_name }} &nbsp;&nbsp;&nbsp; </a>
                         {% else %}
-                        <a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>
-                            <span class="hidden-xs text-uppercase">Log in</span></a>
+                            <a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>
+                                <span class="hidden-xs text-uppercase">Log in</span></a>
                         {% endif %}
 
                     </div>
@@ -102,6 +102,15 @@ _________________________________________________________ -->
                                 <a href="{% url 'carrinho' pedido.pk %}"
                                    class="fa fa-shopping-cart"> {{ pedido.item_set.all|length }} - Itens </a>
                             {% endif %}
+                        </li>
+                        <li id="select" class="">
+                            <a href="#">
+                                <select name="" class="form-control form-control-lg"
+                                        onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                    <option value="http://ciadocimento.com.br">Campina Grande</option>
+                                    <option value="http://guarabira.ciadocimento.com.br">Guarabira</option>
+                                </select>
+                            </a>
                         </li>
                     </ul>
 
