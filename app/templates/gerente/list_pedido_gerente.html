@@ -137,6 +137,7 @@
                                         <th>DATA ENTREGA</th>
                                         <th>PRAZO</th>
                                         <th>STATUS</th>
+                                        <th></th>
                                         <th>CRIADO EM</th>
                                         <th></th>
                                     </tr>
@@ -176,6 +177,13 @@
                                                     <label class="label label-success">Lido</label>
                                                 {% elif not pedido.is_read %}
                                                     <label class="label label-danger">Não Lido</label>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if pedido.entrega %}
+                                                    <label class="label label-success">ENTREGUE</label>
+                                                {% elif not pedido.is_read %}
+                                                    <label class="label label-warning">PENDENTE</label>
                                                 {% endif %}
                                             </td>
                                             <td>

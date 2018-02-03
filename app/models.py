@@ -145,6 +145,7 @@ class Pedido(TimeStamped):
     prazo = models.CharField(max_length=300, blank=True, null=True)
     is_read = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
+    entrega = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u'%s %s' % (self.cliente, self.valor_total)

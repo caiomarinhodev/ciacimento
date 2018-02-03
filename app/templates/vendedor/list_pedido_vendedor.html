@@ -81,10 +81,11 @@
                                         <th>ID</th>
                                         <th>CLIENTE</th>
                                         <th>N° ITENS</th>
-{#                                        <th>VENDEDOR</th>#}
+                                        {#                                        <th>VENDEDOR</th>#}
                                         <th>VALOR ENTREGA</th>
                                         <th>VALOR TOTAL</th>
                                         <th>STATUS</th>
+                                        <th></th>
                                         <th>CRIADO EM</th>
                                         <th></th>
                                     </tr>
@@ -101,9 +102,9 @@
                                             <td>
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>
                                             </td>
-{#                                            <td>#}
-{#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.vendedor }} </a>#}
-{#                                            </td>#}
+                                            {#                                            <td>#}
+                                            {#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.vendedor }} </a>#}
+                                            {#                                            </td>#}
                                             <td>
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.valor_entrega|floatformat:2 }} </a>
                                             </td>
@@ -115,6 +116,13 @@
                                                     <label class="label label-success">Lido</label>
                                                 {% elif not pedido.is_read %}
                                                     <label class="label label-danger">Não Lido</label>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if pedido.entrega %}
+                                                    <label class="label label-success">ENTREGUE</label>
+                                                {% elif not pedido.is_read %}
+                                                    <label class="label label-warning">PENDENTE</label>
                                                 {% endif %}
                                             </td>
                                             <td>
