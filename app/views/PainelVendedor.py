@@ -45,7 +45,7 @@ def buscar_cliente(request):
 class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
     model = Pedido
     success_url = '/app/pedidos/vendedor/'
-    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega', ]
+    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega',]
     template_name = 'vendedor/add_pedido_vendedor.html'
 
     def get_success_url(self):
@@ -75,7 +75,7 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
         data = self.request.POST
         try:
             cliente = Cliente.objects.get(user__username=data['login'])
-        except (Exception, ):
+        except (Exception,):
             cliente = None
         if not cliente:
             user_data = {}
@@ -144,7 +144,7 @@ class PedidoDetailVendedorView(LoginRequiredMixin, DetailView):
 class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
     model = Pedido
     success_url = '/app/pedidos/vendedor/'
-    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega', ]
+    fields = ['valor_unitario', 'forma_pagamento', 'formato_entrega', 'prazo', 'data_entrega', 'entrega']
     template_name = 'vendedor/edit_pedido_vendedor.html'
 
     def get_success_url(self):
