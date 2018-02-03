@@ -155,13 +155,6 @@
 
         $(document).ready(function () {
 
-            $('input').on('change keyup paste', function () {
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('[name=login]').on('change keyup paste', function () {
-                $(this).val($(this).val().toLowerCase());
-            });
             $('#btn_salvar').click(function () {
                 if ($("select").filter(function () {
                         return $.trim($(this).val()).length == 0
@@ -181,9 +174,9 @@
             $('#btn_cancelar').click(function () {
                 return window.history.back();
             });
-            $('.numero').inputmask('99999');
+            $('.numero').attr('type', 'number');
             $('.add-row').click(function () {
-                $('.numero').inputmask('99999');
+                $('.numero').attr('type', 'number');
             });
         });
     </script>
