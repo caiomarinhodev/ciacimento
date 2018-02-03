@@ -154,8 +154,6 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
-
             $(":input").inputmask();
             $('select').addClass('form-control');
             $('[name=data_entrega]').addClass('datepicker');
@@ -165,10 +163,6 @@
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {
                 return window.history.back();
-            });
-            $('.numero').attr('type', 'number');
-            $('.add-row').click(function () {
-                $('.numero').attr('type', 'number');
             });
         });
     </script>
