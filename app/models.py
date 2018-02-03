@@ -148,10 +148,10 @@ class Pedido(TimeStamped):
     entrega = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return u'%s %s' % (self.cliente, self.valor_total)
+        return u'%s' % (self.cliente)
 
     def __str__(self):
-        return u'%s %s' % (self.cliente, self.valor_total)
+        return u'%s' % (self.cliente)
 
     def save(self, *args, **kwargs):
         self.valor_unitario = str(self.valor_unitario).replace(',', '.')
