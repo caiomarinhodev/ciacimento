@@ -9,7 +9,7 @@ from django.views.generic import FormView
 from django.views.generic import RedirectView
 
 from app.forms import FormLogin
-from app.models import Message
+from app.models import Message, Pedido
 
 __author__ = "Caio Marinho"
 __copyright__ = "Copyright 2017"
@@ -65,6 +65,9 @@ class LoginView(FormView):
             url = '/app/pedidos/vendedor'
         elif cliente:
             messages.success(self.request, 'Usuario Logado com sucesso')
+            pedido = Pedido(cliente=cliente)
+            pedido.save()
+            self.request.session['pedido'] = pedido.id
             url = '/catalogo'
         else: # eh gerente
             url = '/app/pedidos/gerente'

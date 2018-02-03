@@ -90,6 +90,7 @@ class RegistroClienteView(FormView):
             pedido = cliente.pedido_set.last()
             pedido.is_completed = True
             pedido.save()
+            print(self.request.session['pedido'])
             # self.request.session['pedido'] = None
             # del self.request.session['pedido']
             # users = User.objects.filter(is_superuser=True)

@@ -1,25 +1,10 @@
 # coding=utf-8
-from datetime import datetime
 
-from django.views.generic.base import ContextMixin
-from django.contrib import messages
-from django.views.generic import ListView
-from app.models import *
 from django.shortcuts import redirect
-from django.contrib.auth import logout
+from django.views.generic import ListView
+from django.views.generic.base import ContextMixin
 
-
-class RedirectMotoristaOcupadoView(ListView):
-    def get(self, request, *args, **kwargs):
-        motorista = None
-        try:
-            motorista = Motorista.objects.get(user=self.request.user)
-        except:
-            pass
-        if motorista:
-            if motorista.ocupado:
-                return redirect('route_pedido_view', **{'pk': motorista.user.pedido_set.last().pk})
-        return super(RedirectMotoristaOcupadoView, self).get(request, *args, **kwargs)
+from app.models import *
 
 
 class CustomContextMixin(ContextMixin):

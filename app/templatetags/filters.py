@@ -125,7 +125,8 @@ def quatidades_hoje(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                qtd = qtd + int(item.quantidade)
+                if item.produto.categoria.nome == 'Cimento':
+                    qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
         return None
@@ -141,7 +142,8 @@ def quatidades_semana(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                qtd += int(item.quantidade)
+                if item.produto.categoria.nome == 'Cimento':
+                    qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
         return None
@@ -155,7 +157,8 @@ def quatidades_mes(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                qtd += int(item.quantidade)
+                if item.produto.categoria.nome == 'Cimento':
+                    qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
         return None

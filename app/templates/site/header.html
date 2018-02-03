@@ -40,7 +40,7 @@
 
                     <div class="login">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'notificacoes' %}"> Olá, {{ user.first_name }} &nbsp;&nbsp;&nbsp; </a>
+                            <a href="{% url 'login' %}"> Olá, {{ user.first_name }} &nbsp;&nbsp;&nbsp; </a>
                         {% else %}
                             <a href="{% url 'login' %}"><i class="fa fa-sign-in"></i>
                                 <span class="hidden-xs text-uppercase">Log in</span></a>
@@ -107,8 +107,8 @@ _________________________________________________________ -->
                             <a href="#">
                                 <select name="" class="form-control form-control-lg"
                                         onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                    <option value="http://ciadocimento.com.br">Campina Grande</option>
                                     <option value="http://guarabira.ciadocimento.com.br">Guarabira</option>
+                                    <option value="http://ciadocimento.com.br">Campina Grande</option>
                                 </select>
                             </a>
                         </li>
