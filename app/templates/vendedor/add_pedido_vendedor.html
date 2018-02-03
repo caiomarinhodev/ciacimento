@@ -145,7 +145,7 @@
             <!-- /.box-body -->
             <div class=" box-footer ">
                 <a href="#" id="btn_cancelar" class="btn btn-default pull-left">Voltar</a>
-                <button type="button" id="btn_salvar" class="btn btn-primary pull-right">Finalizar Pedido
+                <button type="submit" id="btn_salvar" class="btn btn-primary pull-right">Finalizar Pedido
                 </button>
             </div>
         </form>
@@ -155,20 +155,12 @@
 
         $(document).ready(function () {
 
-            $('#btn_salvar').click(function () {
-                if ($("select").filter(function () {
-                        return $.trim($(this).val()).length == 0
-                    }).length == 0) {
-                    $('form').submit();
-                } else {
-                    swal('Preencha todos os campos', 'Verifique se voce preencheu todos os campos ...', 'error');
-                }
-            });
 
             $(":input").inputmask();
             $('select').addClass('form-control');
             $('[name=data_entrega]').addClass('datepicker');
             $('input').addClass('form-control');
+            $("input").attr('required', 'required');
             $('#body').addClass('sidebar-collapse');
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {
@@ -194,11 +186,10 @@
                     },
                     success: function (result) {
                         console.log(result);
-                        console.table(result)
+                        console.table(result);
                         $('#loading').hide();
                         if (result.results.length == 0) {
                             swal('Nenhum Usuario cadastrado com este login', '', 'error');
-                            $('[name=nome]').val('');
                             $('[name=endereco]').val('');
                             $('[name=numero]').val('');
                             $('[name=bairro]').val('');
