@@ -154,12 +154,12 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $(":input").inputmask();
+            
             $('select').addClass('form-control');
             $('[name=data_entrega]').addClass('datepicker');
             $('input').addClass('form-control');
             $("input").attr('required', 'required');
-            $('#body').addClass('sidebar-collapse');
+            
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {
                 return window.history.back();
@@ -183,7 +183,7 @@
                         console.table(result);
                         $('#loading').hide();
                         if (result.results.length == 0) {
-                            swal('Nenhum Usuario cadastrado com este login', '', 'error');
+                            
                             $('[name=endereco]').val('');
                             $('[name=numero]').val('');
                             $('[name=bairro]').val('');
