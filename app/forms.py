@@ -107,7 +107,7 @@ class FormRegisterCliente(ModelForm, BaseForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
                                                           'placeholder': 'Telefone'}))
-    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                             'maxlength': 200,
                                                                             'placeholder': 'Endereço'
                                                                             }))
@@ -119,7 +119,7 @@ class FormRegisterCliente(ModelForm, BaseForm):
                                                                            'maxlength': 100,
                                                                            'placeholder': 'Bairro'
                                                                            }))
-    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    cidade = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                           'maxlength': 200,
                                                                           'placeholder': 'Cidade'
                                                                           }))
@@ -184,7 +184,7 @@ class FormEditCliente(ModelForm, BaseForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
                                                           'placeholder': 'Telefone'}))
-    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                             'maxlength': 200,
                                                                             'placeholder': 'Endereço'
                                                                             }))
@@ -196,7 +196,7 @@ class FormEditCliente(ModelForm, BaseForm):
                                                                            'maxlength': 100,
                                                                            'placeholder': 'Bairro'
                                                                            }))
-    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    cidade = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                           'maxlength': 200,
                                                                           'placeholder': 'Cidade'
                                                                           }))
@@ -218,7 +218,7 @@ class FormClientAddPedido(ModelForm, BaseForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
                                                           'placeholder': 'Telefone'}))
-    endereco = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                             'maxlength': 200,
                                                                             'placeholder': 'Endereço'
                                                                             }))
@@ -230,7 +230,7 @@ class FormClientAddPedido(ModelForm, BaseForm):
                                                                            'maxlength': 100,
                                                                            'placeholder': 'Bairro'
                                                                            }))
-    cidade = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'required': True,
+    cidade = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': True,
                                                                           'maxlength': 200,
                                                                           'placeholder': 'Cidade'
                                                                           }))

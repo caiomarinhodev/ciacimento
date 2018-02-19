@@ -319,38 +319,8 @@
             autoclose: true
         });
 
-        $('[name=cep]').focusout(function () {
-            $('#loading').show();
-            var cep = $('[name=cep]');
-            var cepCode = cep.val();
-            if (cepCode.length <= 0) return;
-            $.ajax({
-                type: 'GET',
-                url: 'http://apps.widenet.com.br/busca-cep/api/cep.json',
-                data: {code: cepCode},
-                success: function (result) {
-                    $('#loading').hide();
-                    if (result.status == 0) {
-                        alert(result.message || "Houve um erro desconhecido");
-                        return;
-                    } else {
-                        $('[name=cep]').val(result.code);
-                        var index = result.address.search('-');
-                        if (index != -1) {
-                            address = result.address.substring(0, index);
-                        } else {
-                            address = result.address;
-                        }
-                        $('[name=endereco]').val(address);
-                        $('[name=bairro]').val(result.district);
-                    }
-                }
-            });
-        });
-
-        $('[name=cep]').inputmask('99.999-999');
-        {#        $('[name=cpf]').inputmask('999.999.999-99');#}
-        {#        $('[name=cnpj]').inputmask('99.999.999/9999-99');#}
+       
+ 
 
         {%  if user.is_superuser %}
             window.setInterval(function () {
