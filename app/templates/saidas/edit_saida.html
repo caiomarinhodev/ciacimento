@@ -33,10 +33,6 @@
 
         $(document).ready(function () {
 
-            $('input').on('change keyup paste', function () {
-                $(this).val($(this).val().toUpperCase());
-            });
-
             $('#btn_salvar').click(function () {
                 if ($("input").filter(function () {
                         return $.trim($(this).val()).length == 0
@@ -47,20 +43,12 @@
                 }
             });
 
-            $(":input").inputmask();
             $('select').addClass('form-control');
             $('[name=data]').addClass('datepicker');
             $('input').addClass('form-control');
-            $('#body').addClass('sidebar-collapse');
             $('#saidas').addClass('active');
             $('#btn_cancelar').click(function () {
                 return window.history.back();
-            });
-            $('.numero').inputmask('99999');
-            $('.telefone').inputmask('(99) [9]99999999');
-            $('.add-row').click(function () {
-                $('.numero').inputmask('99999');
-                $('.telefone').inputmask('(99) [9]99999999');
             });
         });
     </script>
