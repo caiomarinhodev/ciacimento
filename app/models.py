@@ -261,6 +261,11 @@ class Entrada(TimeStamped):
     def __unicode__(self):
         return '%s' % self.cliente
 
+    def save(self, *args, **kwargs):
+        self.valor_total = str(self.valor_total).replace(',', '.')
+        self.valor_pago = str(self.valor_pago).replace(',', '.')
+        super(Pedido, self).save(*args, **kwargs)
+
 
 class Saida(TimeStamped):
     eminente = models.CharField(max_length=300, blank=True, null=True)
@@ -270,6 +275,10 @@ class Saida(TimeStamped):
     data = models.DateField(blank=True, null=True)
     observacoes = models.TextField(blank=True, null=True)
     cor = models.CharField(max_length=100, blank=True, null=True, choices=colors)
+
+    def save(self, *args, **kwargs):
+        self.valor = str(self.valor).replace(',', '.')
+        super(Pedido, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return '%s' % self.eminente
