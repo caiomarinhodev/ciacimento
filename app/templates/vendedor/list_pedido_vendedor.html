@@ -80,7 +80,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>CLIENTE</th>
-                                        <th>N° ITENS</th>
+{#                                        <th>N° ITENS</th>#}
                                         {#                                        <th>VENDEDOR</th>#}
                                         <th>VALOR ENTREGA</th>
                                         <th>VALOR TOTAL</th>
@@ -99,9 +99,9 @@
                                             <td>
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.cliente }} </a>
                                             </td>
-                                            <td>
-                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>
-                                            </td>
+{#                                            <td>#}
+{#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>#}
+{#                                            </td>#}
                                             {#                                            <td>#}
                                             {#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.vendedor }} </a>#}
                                             {#                                            </td>#}
