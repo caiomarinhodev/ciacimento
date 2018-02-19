@@ -264,7 +264,7 @@ class Entrada(TimeStamped):
     def save(self, *args, **kwargs):
         self.valor_total = str(self.valor_total).replace(',', '.')
         self.valor_pago = str(self.valor_pago).replace(',', '.')
-        super(Pedido, self).save(*args, **kwargs)
+        super(Entrada, self).save(*args, **kwargs)
 
 
 class Saida(TimeStamped):
@@ -278,7 +278,7 @@ class Saida(TimeStamped):
 
     def save(self, *args, **kwargs):
         self.valor = str(self.valor).replace(',', '.')
-        super(Pedido, self).save(*args, **kwargs)
+        super(Saida, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return '%s' % self.eminente
