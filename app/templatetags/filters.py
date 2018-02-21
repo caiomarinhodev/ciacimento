@@ -84,7 +84,7 @@ def pedidos_vendedor_total(user):
 def pedidos_hoje(user):
     try:
         now = datetime.now()
-        return Pedido.objects.filter(created_at__day=now.day)
+        return Pedido.objects.filter(created_at__day=now.day, created_at__month=now.month, created_at__year=now.year)
     except (Exception,):
         return None
 
@@ -104,7 +104,7 @@ def pedidos_semana(user):
 def pedidos_mes(user):
     try:
         now = datetime.now()
-        return Pedido.objects.filter(created_at__month=now.month)
+        return Pedido.objects.filter(created_at__month=now.month, created_at__year=now.year)
     except (Exception,):
         return None
 
@@ -125,7 +125,7 @@ def quatidades_hoje(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                if item.produto.categoria.nome == 'Cimento':
+                if item.produto.categoria.nome == 'Cimento' and item.quantidade:
                     qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
@@ -142,7 +142,7 @@ def quatidades_semana(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                if item.produto.categoria.nome == 'Cimento':
+                if item.produto.categoria.nome == 'Cimento' and item.quantidade:
                     qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
@@ -157,7 +157,7 @@ def quatidades_mes(user):
         qtd = 0
         for pedido in list_pedidos:
             for item in pedido.item_set.all():
-                if item.produto.categoria.nome == 'Cimento':
+                if item.produto.categoria.nome == 'Cimento' and item.quantidade:
                     qtd = qtd + int(item.quantidade)
         return qtd
     except (Exception,):
