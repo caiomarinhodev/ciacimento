@@ -158,7 +158,7 @@
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}">
                                                     {% if pedido.vendedor %}
                                                         {{ pedido.vendedor.user.first_name }}
-                                                    {% elif  %}
+                                                    {% else %}
                                                         Loja
                                                     {% endif %}
                                                 </a>
