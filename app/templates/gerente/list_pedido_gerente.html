@@ -158,8 +158,8 @@
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}">
                                                     {% if pedido.vendedor %}
                                                         {{ pedido.vendedor.user.first_name }}
-                                                    {% else %}
-                                                        Pedido no Site
+                                                    {% elif  %}
+                                                        Loja
                                                     {% endif %}
                                                 </a>
                                             </td>
