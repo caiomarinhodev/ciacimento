@@ -158,9 +158,10 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
             data['forms'] = FormEditCliente(self.request.POST)
             data['pontoset'] = ItemFormUpdateSet(self.request.POST, self.request.FILES, instance=self.object)
         else:
-            data['forms'] = FormEditCliente(instance=self.object.cliente,
-                                            initial={'nome': self.object.cliente.user.first_name,
-                                                     'email': self.object.cliente.user.email})
+            if self.object.cliente:
+                data['forms'] = FormEditCliente(instance=self.object.cliente,
+                                                initial={'nome': self.object.cliente.user.first_name,
+                                                         'email': self.object.cliente.user.email})
             data['pontoset'] = ItemFormUpdateSet(instance=self.object)
         return data
 
