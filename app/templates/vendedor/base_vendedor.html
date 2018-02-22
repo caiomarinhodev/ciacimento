@@ -255,7 +255,7 @@
 
 
 <!-- ./wrapper -->
-
+<script src="{% static 'plugins/jQuery/jQuery-2.2.0.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{% static 'plugins/jQueryUI/jquery-ui.min.js' %}"></script>
 
@@ -313,7 +313,6 @@
         $('.datepicker').datepicker({
             clearBtn: true,
             format: 'dd/mm/yyyy',
-            {#            locale: 'pt-BR',#}
             language: 'pt-BR',
             todayHighlight: true,
             autoclose: true

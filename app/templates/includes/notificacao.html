@@ -1,7 +1,7 @@
 {% if notificacao %}
     <script>
-        $(document).ready(function () {
-            {% if notificacao.type_message == 'NOVO_PEDIDO_VENDEDOR' %}
+        {% if notificacao.type_message == 'NOVO_PEDIDO_VENDEDOR' %}
+            $(document).ready(function () {
                 play('alert');
                 swal({
                     title: "Um novo pedido foi cadastrado!",
@@ -15,7 +15,9 @@
                         window.location.href = '{% url 'pedidos_gerente' %}'
                     }, 2000);
                 });
-            {% elif notificacao.type_message == 'NOVO_PEDIDO_LOJA' %}
+            });
+        {% elif notificacao.type_message == 'NOVO_PEDIDO_LOJA' %}
+            $(document).ready(function () {
                 play('alert');
                 swal({
                     title: "Novo Pedido foi feito no Catalogo Virtual!",
@@ -28,7 +30,7 @@
                         window.location.href = '{% url 'pedidos_gerente' %}'
                     }, 2000);
                 });
-            {% endif %}
-        });
+            });
+        {% endif %}
     </script>
 {% endif %}
