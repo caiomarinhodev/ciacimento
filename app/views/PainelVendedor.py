@@ -32,7 +32,7 @@ def buscar_cliente(request):
     for cliente in qs:
         results.append({
             'id': cliente.pk,
-            'nome': cliente.user.first_name,
+            'nome': cliente.user.last_name,
             'endereco': cliente.endereco,
             'numero': cliente.numero,
             'bairro': cliente.bairro,
