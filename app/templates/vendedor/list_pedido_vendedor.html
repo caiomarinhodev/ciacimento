@@ -97,7 +97,8 @@
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.id }}</a>
                                             </td>
                                             <td>
-                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.cliente }} </a>
+                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.cliente.nome }} </a>
+
                                             </td>
 {#                                            <td>#}
 {#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>#}

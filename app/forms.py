@@ -102,7 +102,7 @@ class FormRegister(ModelForm, BaseForm):
 
 class FormRegisterCliente(ModelForm, BaseForm):
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                         'maxlength': 200,
+                                                         'maxlength': 300,
                                                          'placeholder': 'Nome Completo'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
@@ -169,7 +169,7 @@ class FormSaida(ModelForm, BaseForm):
 
 class FormPedido(FormBaseAddress):
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                         'maxlength': 200,
+                                                         'maxlength': 300,
                                                          'placeholder': 'Nome Estabelecimento'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
@@ -179,7 +179,7 @@ class FormPedido(FormBaseAddress):
 
 class FormEditCliente(ModelForm, BaseForm):
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                         'maxlength': 200,
+                                                         'maxlength': 300,
                                                          'placeholder': 'Nome Completo'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
@@ -213,7 +213,7 @@ class FormClientAddPedido(ModelForm, BaseForm):
                                                           'maxlength': 200,
                                                           'placeholder': 'Login'}))
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
-                                                         'maxlength': 200,
+                                                         'maxlength': 300,
                                                          'placeholder': 'Nome Completo'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
