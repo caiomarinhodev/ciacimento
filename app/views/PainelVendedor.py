@@ -81,7 +81,7 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
             user_data = {}
             user_data['username'] = data['login']
             user_data['password'] = data['login']
-            user_data['first_name'] = data['nome']
+            user_data['last_name'] = data['nome']
             user_data['email'] = data['email']
             usuario = User.objects.create_user(**user_data)
             usuario.save()
@@ -160,7 +160,7 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
         else:
             if self.object.cliente:
                 data['forms'] = FormEditCliente(instance=self.object.cliente,
-                                                initial={'nome': self.object.cliente.user.first_name,
+                                                initial={'nome': self.object.cliente.user.last_name,
                                                          'email': self.object.cliente.user.email})
             data['pontoset'] = ItemFormUpdateSet(instance=self.object)
         return data
@@ -179,13 +179,13 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
         usuario = None
         cliente = None
         try:
-            usuario = User.objects.get(first_name=data['nome'])
+            usuario = User.objects.get(last_name=data['nome'])
             usuario.email = data['email']
             usuario.save()
             cliente = usuario.cliente
         except (Exception,):
             username = 'usuario-' + str(uuid.uuid4())[:8]
-            usuario = User(username=username, password='usuario', first_name=data['nome'], email=data['email'])
+            usuario = User(username=username, password='usuario', last_name=data['nome'], email=data['email'])
             usuario.save()
             cliente = Cliente(user=usuario)
             cliente.save()
