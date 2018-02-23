@@ -146,6 +146,7 @@ class Pedido(TimeStamped):
     is_read = models.BooleanField(default=False)
     is_completed = models.BooleanField(default=False)
     entrega = models.BooleanField(default=False)
+    observacoes = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return u'%s' % (self.cliente)

@@ -140,6 +140,12 @@
                             {{ form.prazo }}
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="firstname">Observações: </label>
+                            {{ form.observacoes }}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -154,12 +160,13 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            
+
             $('select').addClass('form-control');
             $('[name=data_entrega]').addClass('datepicker');
             $('input').addClass('form-control');
+            $('textarea').addClass('form-control');
             $("input").attr('required', 'required');
-            
+
             $('#pedidos').addClass('active');
             $('#btn_cancelar').click(function () {
                 return window.history.back();
@@ -183,7 +190,7 @@
                         console.table(result);
                         $('#loading').hide();
                         if (result.results.length == 0) {
-                            
+
                             $('[name=endereco]').val('');
                             $('[name=numero]').val('');
                             $('[name=bairro]').val('');
