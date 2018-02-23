@@ -30,7 +30,6 @@ class BaseAddress(models.Model):
 
 class Cliente(TimeStamped, BaseAddress):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=True, null=True)
-    nome = phone = models.CharField(max_length=300, blank=True, null=True, verbose_name='Nome')
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.CharField(max_length=200, blank=True, null=True)
 
