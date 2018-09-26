@@ -80,7 +80,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>CLIENTE</th>
-{#                                        <th>N° ITENS</th>#}
+                                        {#                                        <th>N° ITENS</th>#}
                                         {#                                        <th>VENDEDOR</th>#}
                                         <th>VALOR ENTREGA</th>
                                         <th>VALOR TOTAL</th>
@@ -100,9 +100,9 @@
                                                 <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.cliente.nome }} </a>
 
                                             </td>
-{#                                            <td>#}
-{#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>#}
-{#                                            </td>#}
+                                            {#                                            <td>#}
+                                            {#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.item_set.all|length }} </a>#}
+                                            {#                                            </td>#}
                                             {#                                            <td>#}
                                             {#                                                <a href="{% url 'view_pedido_vendedor' pedido.id %}"> {{ pedido.vendedor }} </a>#}
                                             {#                                            </td>#}
@@ -143,17 +143,37 @@
                         </div>
                     </div>
 
+
+                    <div class="row">
+                        <div class="text-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.previous_page_number }}"><
+                                            Anterior</a>
+                                        </li>
+                                    {% endif %}
+                                    <li class="page-item"><a class="page-link" href="#">
+                                        Página {{ page_obj.number }} de {{ paginator.num_pages }}
+                                    </a>
+                                    </li>
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.next_page_number }}">Próximo
+                                            ></a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#table').DataTable({
-                responsive: true,
-                order: [[0, "desc"]]
-            });
+         $(document).ready(function () {
             $('#pedidos').addClass('active');
         });
 

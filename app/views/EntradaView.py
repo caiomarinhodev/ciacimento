@@ -11,6 +11,7 @@ from app.models import Entrada
 class EntradaListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Entrada
+    paginate_by = 10
     context_object_name = 'entradas'
     template_name = 'entradas/list_entrada.html'
 

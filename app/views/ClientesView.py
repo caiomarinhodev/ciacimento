@@ -7,6 +7,7 @@ from app.models import Cliente, Vendedor
 class ClientesGerenteListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Cliente
+    paginate_by = 10
     context_object_name = 'clientes'
     template_name = 'clientes/list_clientes.html'
 
@@ -17,6 +18,7 @@ class ClientesGerenteListView(LoginRequiredMixin, ListView):
 class ClientesVendedorListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Cliente
+    paginate_by = 10
     context_object_name = 'clientes'
     template_name = 'clientes/list_clientes.html'
 

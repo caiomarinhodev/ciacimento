@@ -11,6 +11,7 @@ from app.views.snippet_template import render_block_to_string
 class NotificacoesListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Notification
+    paginate_by = 10
     context_object_name = 'notificacoes'
     template_name = 'notificacoes/list_notificacoes.html'
 

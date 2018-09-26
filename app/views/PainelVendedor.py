@@ -18,6 +18,7 @@ class ListPedidosVendedor(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'vendedor/list_pedido_vendedor.html'
     model = Pedido
+    paginate_by = 10
     context_object_name = 'pedidos_vendedor'
 
     def get_queryset(self):

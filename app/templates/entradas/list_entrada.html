@@ -115,7 +115,8 @@
                                             </td>
 
                                             <td>
-                                                <label class="label" style="color: {{ entrada.cor }};background-color: {{ entrada.cor }}">{{ entrada.cor }}</label>
+                                                <label class="label"
+                                                       style="color: {{ entrada.cor }};background-color: {{ entrada.cor }}">{{ entrada.cor }}</label>
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary btn-block"
@@ -131,6 +132,31 @@
                         </div>
                     </div>
 
+
+                    <div class="row">
+                        <div class="text-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.previous_page_number }}"><
+                                            Anterior</a>
+                                        </li>
+                                    {% endif %}
+                                    <li class="page-item"><a class="page-link" href="#">
+                                        Página {{ page_obj.number }} de {{ paginator.num_pages }}
+                                    </a>
+                                    </li>
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.next_page_number }}">Próximo
+                                            ></a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -138,10 +164,7 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#table').DataTable({
-                responsive: true,
-                order: [[0, "desc"]]
-            });
+
             $('#entradas').addClass('active');
         });
 

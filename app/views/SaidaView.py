@@ -11,6 +11,7 @@ from app.models import Saida
 class SaidaListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Saida
+    paginate_by = 10
     context_object_name = 'saidas'
     template_name = 'saidas/list_saida.html'
 

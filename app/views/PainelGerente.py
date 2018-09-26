@@ -10,6 +10,7 @@ class ListPedidosGerente(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'gerente/list_pedido_gerente.html'
     model = Pedido
+    paginate_by = 10
     context_object_name = 'pedidos_gerente'
 
     def get_queryset(self):
@@ -20,6 +21,7 @@ class ListPedidosMesGerente(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'gerente/list_pedido_gerente.html'
     model = Pedido
+    paginate_by = 10
     context_object_name = 'pedidos_gerente'
 
     def get_queryset(self):
@@ -31,6 +33,7 @@ class ListPedidosSemanaGerente(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'gerente/list_pedido_gerente.html'
     model = Pedido
+    paginate_by = 10
     context_object_name = 'pedidos_gerente'
 
     def get_queryset(self):
@@ -44,6 +47,7 @@ class ListPedidosHojeGerente(LoginRequiredMixin, ListView):
     login_url = '/login/'
     template_name = 'gerente/list_pedido_gerente.html'
     model = Pedido
+    paginate_by = 10
     context_object_name = 'pedidos_gerente'
 
     def get_queryset(self):
