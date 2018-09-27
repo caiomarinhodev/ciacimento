@@ -14,7 +14,7 @@ class ListPedidosGerente(LoginRequiredMixin, ListView):
     context_object_name = 'pedidos_gerente'
 
     def get_queryset(self):
-        return Pedido.objects.all()
+        return Pedido.objects.all().order_by('-created_at')
 
 
 class ListPedidosMesGerente(LoginRequiredMixin, ListView):
@@ -26,7 +26,7 @@ class ListPedidosMesGerente(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         now = datetime.now()
-        return Pedido.objects.filter(created_at__month=now.month)
+        return Pedido.objects.filter(created_at__month=now.month, created_at__year=now.year)
 
 
 class ListPedidosSemanaGerente(LoginRequiredMixin, ListView):
@@ -52,4 +52,6 @@ class ListPedidosHojeGerente(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         now = datetime.now()
-        return Pedido.objects.filter(created_at__day=now.day)
+        month = datetime.now().month
+        year = datetime.now().year
+        return Pedido.objects.filter(created_at__day=now.day, created_at__month=month, created_at__year=year)

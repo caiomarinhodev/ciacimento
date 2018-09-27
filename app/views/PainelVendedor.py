@@ -22,7 +22,7 @@ class ListPedidosVendedor(LoginRequiredMixin, ListView):
     context_object_name = 'pedidos_vendedor'
 
     def get_queryset(self):
-        return Pedido.objects.filter(vendedor__user=self.request.user)
+        return Pedido.objects.filter(vendedor__user=self.request.user).order_by('-created_at')
 
 
 @require_http_methods(["GET"])
