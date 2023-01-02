@@ -27,7 +27,7 @@ class NotificacoesListView(LoginRequiredMixin, ListView):
 def notificar_novo_pedido_vendedor(request):
     notificacao = Notification.objects.filter(to=request.user, type_message='NOVO_PEDIDO_VENDEDOR',
                                               is_read=False).last()
-    context = Context({'notificacao': notificacao, 'user': request.user})
+    context = {'notificacao': notificacao, 'user': request.user}
     return_str = render_block_to_string('includes/notificacao.html', context)
     if notificacao:
         notificacao.is_read = True
@@ -39,7 +39,7 @@ def notificar_novo_pedido_vendedor(request):
 def notificar_novo_pedido_loja(request):
     notificacao = Notification.objects.filter(to=request.user, type_message='NOVO_PEDIDO_LOJA',
                                               is_read=False).last()
-    context = Context({'notificacao': notificacao, 'user': request.user})
+    context = {'notificacao': notificacao, 'user': request.user}
     return_str = render_block_to_string('includes/notificacao.html', context)
     if notificacao:
         notificacao.is_read = True

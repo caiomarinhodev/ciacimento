@@ -127,6 +127,10 @@ type_entrega = (
 
 
 class FormaPagamento(TimeStamped):
+    class Meta:
+        verbose_name = 'Forma de Pagamento'
+        verbose_name_plural = 'Formas de Pagamento'
+
     forma = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
@@ -141,7 +145,7 @@ class Pedido(TimeStamped):
     vendedor = models.ForeignKey(Vendedor, on_delete=models.CASCADE, blank=True, null=True)
     formato_entrega = models.CharField(max_length=100, blank=True, null=True, choices=type_entrega)
     data_entrega = models.DateField(blank=True, null=True)
-    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True, on_delete=models.CASCADE)
     valor_unitario = models.CharField(max_length=100, blank=True, null=True)
     prazo = models.CharField(max_length=300, blank=True, null=True)
     is_read = models.BooleanField(default=False)
@@ -253,7 +257,7 @@ class Entrada(TimeStamped):
     valor_total = models.CharField(max_length=100, blank=True, null=True)
     valor_pago = models.CharField(max_length=100, blank=True, null=True)
     data = models.DateField(blank=True, null=True)
-    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    forma_pagamento = models.ForeignKey(FormaPagamento, blank=True, null=True, on_delete=models.CASCADE)
     observacoes = models.TextField(blank=True, null=True)
     cor = models.CharField(max_length=100, blank=True, null=True, choices=colors)
 
@@ -273,7 +277,7 @@ class Saida(TimeStamped):
     eminente = models.CharField(max_length=300, blank=True, null=True)
     razao = models.CharField(max_length=300, blank=True, null=True)
     valor = models.CharField(max_length=300, blank=True, null=True)
-    forma = models.ForeignKey(FormaPagamento, blank=True, null=True)
+    forma = models.ForeignKey(FormaPagamento, blank=True, null=True, on_delete=models.CASCADE)
     data = models.DateField(blank=True, null=True)
     observacoes = models.TextField(blank=True, null=True)
     cor = models.CharField(max_length=100, blank=True, null=True, choices=colors)
@@ -286,4 +290,4 @@ class Saida(TimeStamped):
         return '%s' % self.eminente
 
     def __str__(self):
-        return str(self.id_pedido)
+        return str(self.eminente)

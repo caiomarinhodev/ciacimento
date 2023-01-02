@@ -2,6 +2,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.urls import path
 
 from app.views.ClientesView import ClientesGerenteListView
 from app.views.ClientesView import ClientesVendedorListView
@@ -38,8 +39,7 @@ Including another URLconf
 """
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^admin/login/$', auth_views.login, name='admin_login'),
+    path('admin/', admin.site.urls, name='admin'),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^account/logout/$', LogoutView.as_view(), name='auth_logout'),

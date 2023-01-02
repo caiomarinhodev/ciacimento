@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
 {% load filters %}
 <html>
 <head>
@@ -207,7 +207,7 @@
                     </li>
 
                     <li id="admin">
-                        <a href="{% url 'admin_login' %}" target="_blank">
+                        <a href="{% url 'admin:index' %}" target="_blank">
                             <i class="fa fa-dashboard"></i> <span>Banco de Dados</span>
                         </a>
                     </li>
@@ -337,7 +337,7 @@
                         console.log(err);
                     }
                 });
-            }, 4000);
+            }, 40000);
 
 
             window.setInterval(function () {
@@ -355,7 +355,7 @@
                         console.log(err);
                     }
                 });
-            }, 4000);
+            }, 40000);
 
         {% endif %}
 

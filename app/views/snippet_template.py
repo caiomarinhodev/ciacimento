@@ -26,5 +26,5 @@ def render_block_to_string(template_name, dictionary=None, context_instance=None
     if context_instance:
         context_instance.update(dictionary)
     else:
-        context_instance = Context(dictionary)
+        context_instance = dictionary
     return template.render(context_instance)
