@@ -165,7 +165,6 @@
 
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="{% url 'acompanhar_list' %}">Acompanhar Pedidos</a></li>
                             </ul>
                         </li>
                     {% elif user.motorista %}
@@ -341,101 +340,42 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    {% if user.motorista %}
-                        {% if user.motorista.photo %}
-                            <img src="{{ user.motorista.photo }}" class="img-circle" alt="User Image" style="margin-bottom: 15px;">
-                        {% else %}
-                            <img src="{% static 'img/300x300.png' %}" class="img-circle" alt="User Image">
-                        {% endif %}
-                    {% elif user.estabelecimento %}
-                        {% if user.estabelecimento.photo %}
-                            <img src="{{ user.estabelecimento.photo }}" class="img-circle" alt="User Image" style="margin-bottom: 15px;">
-                        {% else %}
-                            <img src="{% static 'img/300x300.png' %}" class="img-circle" alt="User Image">
-                        {% endif %}
-                    {% endif %}
-                </div>
-                <div class="pull-left info">
-                    <p>Olá, {{ user.first_name }}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">MENU</li>
                 {% if user.motorista %}
                     <li id="pedidos">
-                        <a href="{% url 'pedidos_motorista' %}">
-                            <i class="fa fa-list-alt"></i> <span>Pedidos</span>
-                        </a>
                     </li>
                     <li id="entregas">
-                        <a href="{% url 'entregas_motorista' %}">
-                            <i class="fa fa-motorcycle"></i> <span>Entregas</span>
-                        </a>
                     </li>
                     <li id="lojas_credenciadas">
-                        <a href="{% url 'lojas_credenciadas' %}">
-                            <i class="fa fa-suitcase"></i> <span>Lojas Credenciadas</span>
-                        </a>
                     </li>
                     {% if user.motorista.ocupado %}
                         <li id="chat">
-                            <a href="{% url 'chat_motorista_view' %}">
-                                <i class="fa fa-comments-o"></i> <span>Chat</span>
-                            </a>
                         </li>
                     {% endif %}
                 {% else %}
                     <li id="pedidos">
-                        <a href="{% url 'pedidos_estabelecimento' %}">
-                            <i class="fa fa-dashboard"></i> <span>Pedidos</span>
-                        </a>
                     </li>
                     <li id="acompanhar">
-                        <a href="{% url 'acompanhar_list' %}">
-                            <i class="fa fa-location-arrow"></i> <span>Acompanhar</span>
-                        </a>
                     </li>
                     <li id="relatorios">
-                        <a href="{% url 'relatorios' %}">
-                            <i class="fa fa-bar-chart"></i> <span>Relatorios</span>
-                        </a>
                     </li>
                     <!--<li id="motoristas_ativos">-->
-                    <!--    <a href="{% url 'motoristas_ativos_view' %}">-->
-                    <!--        <i class="fa fa-dashboard"></i> <span>Motoristas em Entrega</span>-->
-                    <!--    </a>-->
                     <!--</li>-->
                     <li id="chat">
-                        <a href="{% url 'list_all_chats' %}">
-                            <i class="fa fa-comments-o"></i> <span>Chat</span>
-                        </a>
                     </li>
                     <li id="editar_perfil">
-                        <a href="{% url 'edit_perfil_view' %}">
-                            <i class="fa fa-user"></i> <span>Editar Perfil</span>
-                        </a>
                     </li>
                 {% endif %}
                 <li id="notificacoes">
-                    <a href="{% url "notificacoes" %}">
-                        <i class="fa fa-warning"></i> <span>Notificações</span>
-                    </a>
                 </li>
                 <li id="logout">
-                    <a href="{% url "auth_logout" %}">
-                        <i class="fa fa-sign-out"></i> <span>Sair</span>
-                    </a>
                 </li>
             </ul>
         </section>
         <!-- /.sidebar -->
     </aside>
-    <audio id="alert" src="{% static 'alert.wav' %}" controls="false" preload="auto" autobuffer
-           style="display: none;"></audio>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -451,7 +391,6 @@
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>&copy; Delivery</b>
@@ -553,146 +492,6 @@
         $('[name=cep]').inputmask('99.999-999');
         $('[name=cpf]').inputmask('999.999.999-99');
         $('[name=cnpj]').inputmask('99.999.999/9999-99');
-
-
-        {% if user.motorista %}
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_enable_rota_motorista' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_delete_loja_motorista' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_novo_pedido_motorista' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_admin_message' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-
-        {% else %}
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_accept_order_loja' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notificar_order_delivered_loja' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-
-
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notificar_all_delivered_loja' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 4000);
-
-
-        {% endif %}
-
-        window.setInterval(function () {
-            $.ajax({
-                url: "{% url 'notify_admin_message' %}",
-                type: "GET", // http method
-                success: function (data) {
-                    $('#notify').html(data);
-                },
-                complete: function () {
-                    $('#loading').hide();
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        }, 4000);
-
 
     });
 
