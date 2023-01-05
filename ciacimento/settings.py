@@ -93,6 +93,21 @@ DATABASES = {
     }
 }
 
+NAME_DB = os.getenv('DB_NAME', 'db.sqlite3')
+
+if 'sqlite' in NAME_DB:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    db_from_env = dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/{}'.format(NAME_DB),
+                                         conn_max_age=600)
+    DATABASES['default'].update(db_from_env)
+
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
