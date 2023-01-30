@@ -10,6 +10,6 @@ python manage.py collectstatic --no-input
 python manage.py makemigrations
 python manage.py migrate
 
-python manage.py starter --username caio --password oficinag3 --noinput --email caiomarinho8@gmail.com
-python manage.py starter --username admin --password Admin123! --noinput --email admin@gmail.com
-python manage.py starter --username araly --password ciacimento --noinput --email ciadocimento@gmail.com
+#python manage.py starter --username caio --password oficinag3 --noinput --email caiomarinho8@gmail.com
+#python manage.py starter --username admin --password Admin123! --noinput --email admin@gmail.com
+#python manage.py starter --username araly --password ciacimento --noinput --email ciadocimento@gmail.com
