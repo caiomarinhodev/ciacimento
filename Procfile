@@ -1,1 +1,1 @@
-web: gunicorn ciacimento.wsgi --log-file -
+web: gunicorn ciacimento.wsgi --log-file - --bind
