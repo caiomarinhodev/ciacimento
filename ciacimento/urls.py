@@ -1,11 +1,13 @@
 """urls.py: Urls definidas."""
+from django.conf import settings
 from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include
 
 from app.views.ClientesView import ClientesGerenteListView
 from app.views.ClientesView import ClientesVendedorListView
+from app.views.EntradaView import *
 from app.views.HomeView import HomeView
 from app.views.LoginView import LoginView, LogoutView, submit_message
 from app.views.LojaView import ListProducts, ProductDetail, CarrinhoView, add_item_carrinho, remove_item_carrinho, \
@@ -16,7 +18,6 @@ from app.views.PainelGerente import ListPedidosGerente, ListPedidosMesGerente, L
 from app.views.PainelVendedor import ListPedidosVendedor, PedidoUpdateVendedorView, PedidoDetailVendedorView, \
     buscar_cliente
 from app.views.PainelVendedor import PedidoCreateVendedorView
-from app.views.EntradaView import *
 from app.views.SaidaView import *
 
 __author__ = "Caio Marinho"
@@ -80,5 +81,8 @@ urlpatterns = [
     url(r'^app/pedidos/mes/gerente/$', ListPedidosMesGerente.as_view(), name='pedidos_mes_g'),
     url(r'^app/pedidos/semana/gerente/$', ListPedidosSemanaGerente.as_view(), name='pedidos_semana_g'),
     url(r'^app/pedidos/hoje/gerente/$', ListPedidosHojeGerente.as_view(), name='pedidos_hoje_g'),
+    path('database/', include('database_manager.urls'))
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

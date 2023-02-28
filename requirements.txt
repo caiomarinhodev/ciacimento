@@ -1,5 +1,6 @@
 appdirs==1.4.4
 dj-database-url
+django-import-export
 Django==3.2.16
 gunicorn
 psycopg2-binary

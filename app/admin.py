@@ -1,4 +1,6 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from app.models import *
 
@@ -17,23 +19,23 @@ class ItemInline(admin.TabularInline):
     model = Item
 
 
-class FotoAdmin(admin.ModelAdmin):
+class FotoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'url', 'produto',)
 
 
-class ClienteAdmin(admin.ModelAdmin):
+class ClienteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'user', 'phone', 'full_address', 'created_at')
 
 
-class CategoriaAdmin(admin.ModelAdmin):
+class CategoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('nome', 'id', 'created_at')
 
 
-class MarcaAdmin(admin.ModelAdmin):
+class MarcaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('nome', 'id', 'site', 'foto', 'created_at')
 
 
-class ProdutoAdmin(admin.ModelAdmin):
+class ProdutoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [
         FotoInline,
     ]
@@ -42,14 +44,14 @@ class ProdutoAdmin(admin.ModelAdmin):
                     'created_at')
 
 
-class PedidoAdmin(admin.ModelAdmin):
+class PedidoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [
         ItemInline,
     ]
     list_display = ('cliente', 'formato_entrega', 'valor_unitario', 'forma_pagamento', 'data_entrega', 'created_at')
 
 
-class ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'produto', 'quantidade', 'valor_item', 'pedido', 'created_at')
 
 
@@ -61,26 +63,47 @@ class MessageAdmin(admin.ModelAdmin):
     list_display = ('id', 'message', 'email',)
 
 
-class FormaPagamentoAdmin(admin.ModelAdmin):
+class FormaPagamentoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('forma', 'id', 'created_at',)
 
 
-class TipoAdmin(admin.ModelAdmin):
+class TipoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('nome', 'id',)
 
 
-class VendedorAdmin(admin.ModelAdmin):
+class VendedorAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('user', 'id',)
 
 
-class EntradaAdmin(admin.ModelAdmin):
+class EntradaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         'cliente', 'id_pedido', 'valor_total', 'valor_pago', 'data', 'forma_pagamento', 'cor', 'created_at',)
 
 
-class SaidaAdmin(admin.ModelAdmin):
+class SaidaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('eminente', 'razao', 'valor', 'forma', 'data', 'observacoes', 'cor', 'created_at',)
 
+
+class UserResource(resources.ModelResource):
+    class Meta:
+        model = User
+        fields = (
+            'id', 'username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff', 'is_superuser',
+            'last_login',)
+
+
+# class UserAdmin(ExportMixin, UserAdmin):
+#     resource_class = UserResource
+#     pass
+
+class UserAdmin(ImportExportModelAdmin):
+    list_display = ('id', 'username', 'first_name', 'last_name', 'email',)
+    resource_class = UserResource
+    pass
+
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
