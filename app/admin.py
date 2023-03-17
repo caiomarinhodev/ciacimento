@@ -1,8 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from app.models import *
+from app.models import Foto, Item, Cliente, Categoria, Pedido, Marca, Produto, Notification, Message, \
+    Vendedor, Tipo, FormaPagamento, Entrada, Saida
 
 """
 admin.py: Definicao de classes para gerenciar no painel de admin do Django.
@@ -92,18 +94,6 @@ class UserResource(resources.ModelResource):
             'last_login',)
 
 
-# class UserAdmin(ExportMixin, UserAdmin):
-#     resource_class = UserResource
-#     pass
-
-class UserAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'username', 'first_name', 'last_name', 'email',)
-    resource_class = UserResource
-    pass
-
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
 
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Cliente, ClienteAdmin)
