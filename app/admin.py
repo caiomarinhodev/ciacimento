@@ -36,6 +36,7 @@ class MarcaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 class ProdutoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    import_export_args = {'batch_size': 500}  # define o tamanho do lote para 50 itens por vez
     inlines = [
         FotoInline,
     ]
