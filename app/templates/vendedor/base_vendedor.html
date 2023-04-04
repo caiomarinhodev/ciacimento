@@ -214,11 +214,6 @@
 
                 {% endif %}
 
-                <li id="notificacoes">
-                    <a href="{% url "notificacoes" %}">
-                        <i class="fa fa-warning"></i> <span>Notificacoes</span>
-                    </a>
-                </li>
                 <li id="logout">
                     <a href="{% url "auth_logout" %}">
                         <i class="fa fa-sign-out"></i> <span>Sair</span>
@@ -318,46 +313,46 @@
             autoclose: true
         });
 
-       
- 
-
-        {%  if user.is_superuser %}
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_novo_pedido_vendedor' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        console.log(data);
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 40000);
 
 
-            window.setInterval(function () {
-                $.ajax({
-                    url: "{% url 'notify_novo_pedido_loja' %}",
-                    type: "GET", // http method
-                    success: function (data) {
-                        console.log(data);
-                        $('#notify').html(data);
-                    },
-                    complete: function () {
-                        $('#loading').hide();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }, 40000);
 
-        {% endif %}
+{#        {%  if user.is_superuser %}#}
+{#            window.setInterval(function () {#}
+{#                $.ajax({#}
+{#                    url: "{% url 'notify_novo_pedido_vendedor' %}",#}
+{#                    type: "GET", // http method#}
+{#                    success: function (data) {#}
+{#                        console.log(data);#}
+{#                        $('#notify').html(data);#}
+{#                    },#}
+{#                    complete: function () {#}
+{#                        $('#loading').hide();#}
+{#                    },#}
+{#                    error: function (err) {#}
+{#                        console.log(err);#}
+{#                    }#}
+{#                });#}
+{#            }, 40000);#}
+{##}
+{##}
+{#            window.setInterval(function () {#}
+{#                $.ajax({#}
+{#                    url: "{% url 'notify_novo_pedido_loja' %}",#}
+{#                    type: "GET", // http method#}
+{#                    success: function (data) {#}
+{#                        console.log(data);#}
+{#                        $('#notify').html(data);#}
+{#                    },#}
+{#                    complete: function () {#}
+{#                        $('#loading').hide();#}
+{#                    },#}
+{#                    error: function (err) {#}
+{#                        console.log(err);#}
+{#                    }#}
+{#                });#}
+{#            }, 40000);#}
+{##}
+{#        {% endif %}#}
 
     });
 
@@ -387,3 +382,9 @@
 
 </body>
 </html>
+
+
+
+
+
+

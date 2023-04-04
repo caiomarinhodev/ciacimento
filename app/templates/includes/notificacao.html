@@ -1,36 +1,36 @@
-{% if notificacao %}
-    <script>
-        {% if notificacao.type_message == 'NOVO_PEDIDO_VENDEDOR' %}
-            $(document).ready(function () {
-                play('alert');
-                swal({
-                    title: "Um novo pedido foi cadastrado!",
-                    text: '{{ notificacao.message }}',
-                    type: 'success',
-                    closeOnConfirm: false,
-                    confirmButtonClass: 'btn-primary',
-                    showLoaderOnConfirm: true
-                }, function () {
-                    setTimeout(function () {
-                        window.location.href = '{% url 'pedidos_gerente' %}'
-                    }, 2000);
-                });
-            });
-        {% elif notificacao.type_message == 'NOVO_PEDIDO_LOJA' %}
-            $(document).ready(function () {
-                play('alert');
-                swal({
-                    title: "Novo Pedido foi feito no Catalogo Virtual!",
-                    text: '{{ notificacao.message }}',
-                    type: 'warning',
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true
-                }, function () {
-                    setTimeout(function () {
-                        window.location.href = '{% url 'pedidos_gerente' %}'
-                    }, 2000);
-                });
-            });
-        {% endif %}
-    </script>
-{% endif %}
+{#{% if notificacao %}#}
+{#    <script>#}
+{#        {% if notificacao.type_message == 'NOVO_PEDIDO_VENDEDOR' %}#}
+{#            $(document).ready(function () {#}
+{#                play('alert');#}
+{#                swal({#}
+{#                    title: "Um novo pedido foi cadastrado!",#}
+{#                    text: '{{ notificacao.message }}',#}
+{#                    type: 'success',#}
+{#                    closeOnConfirm: false,#}
+{#                    confirmButtonClass: 'btn-primary',#}
+{#                    showLoaderOnConfirm: true#}
+{#                }, function () {#}
+{#                    setTimeout(function () {#}
+{#                        window.location.href = '{% url 'pedidos_gerente' %}'#}
+{#                    }, 2000);#}
+{#                });#}
+{#            });#}
+{#        {% elif notificacao.type_message == 'NOVO_PEDIDO_LOJA' %}#}
+{#            $(document).ready(function () {#}
+{#                play('alert');#}
+{#                swal({#}
+{#                    title: "Novo Pedido foi feito no Catalogo Virtual!",#}
+{#                    text: '{{ notificacao.message }}',#}
+{#                    type: 'warning',#}
+{#                    closeOnConfirm: false,#}
+{#                    showLoaderOnConfirm: true#}
+{#                }, function () {#}
+{#                    setTimeout(function () {#}
+{#                        window.location.href = '{% url 'pedidos_gerente' %}'#}
+{#                    }, 2000);#}
+{#                });#}
+{#            });#}
+{#        {% endif %}#}
+{#    </script>#}
+{#{% endif %}#}
