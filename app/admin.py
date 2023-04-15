@@ -41,8 +41,7 @@ class ProdutoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [
         FotoInline,
     ]
-    list_display = ('cod', 'nome', 'categoria', 'cor', 'peso', 'marca', 'valor', 'tipo_embalagem',
-                    'is_active', 'is_oferta',
+    list_display = ('cod', 'id', 'nome', 'categoria', 'cor', 'peso', 'marca', 'valor', 'is_active',
                     'created_at')
 
 
@@ -50,7 +49,7 @@ class PedidoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [
         ItemInline,
     ]
-    list_display = ('cliente', 'formato_entrega', 'valor_unitario', 'forma_pagamento', 'data_entrega', 'created_at')
+    list_display = ('cliente','id', 'formato_entrega', 'valor_unitario', 'forma_pagamento', 'data_entrega', 'created_at')
 
 
 class ItemAdmin(ImportExportModelAdmin, admin.ModelAdmin):
