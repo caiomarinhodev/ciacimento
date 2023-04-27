@@ -4,8 +4,6 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 
-from app.views.geocoding import geocode
-
 
 class TimeStamped(models.Model):
     class Meta:
@@ -29,18 +27,13 @@ class BaseAddress(models.Model):
 
 
 class Cliente(TimeStamped, BaseAddress):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     nome = models.TextField(blank=True, null=True, verbose_name='Nome')
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
     full_address = models.TextField(blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        self.numero = str(self.numero).replace('_', '')
-        self.phone = str(self.phone).replace('_', '')
-        super(Cliente, self).save(*args, **kwargs)
-
     def __str__(self):
-        return u'%s - %s - %s/PB' % (self.nome, self.phone, self.cidade)
+        return u'%s' % self.nome
 
 
 class Vendedor(TimeStamped, BaseAddress):
