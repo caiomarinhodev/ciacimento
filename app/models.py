@@ -37,14 +37,8 @@ class Cliente(TimeStamped, BaseAddress):
     def save(self, *args, **kwargs):
         self.numero = str(self.numero).replace('_', '')
         self.phone = str(self.phone).replace('_', '')
-        try:
-            address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
-            self.full_address = address
-            pto = geocode(address)
-            self.lat = pto['latitude']
-            self.lng = pto['longitude']
-        except (Exception,):
-            pass
+        address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
+        self.full_address = address
         super(Cliente, self).save(*args, **kwargs)
 
     def __str__(self):
