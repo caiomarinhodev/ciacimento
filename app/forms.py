@@ -211,31 +211,31 @@ class FormEditCliente(ModelForm, BaseForm):
 class FormClientAddPedido(ModelForm, BaseForm):
     login = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                           'maxlength': 200,
-                                                          'placeholder': 'Login'}))
+                                                          'placeholder': 'Login'}, ))
     nome = forms.CharField(widget=forms.TextInput(attrs={'required': True,
                                                          'maxlength': 300,
                                                          'placeholder': 'Nome Completo'}))
-    phone = forms.CharField(widget=forms.TextInput(attrs={'required': True,
+    phone = forms.CharField(widget=forms.TextInput(attrs={'required': False,
                                                           'maxlength': 200,
-                                                          'placeholder': 'Telefone'}))
+                                                          'placeholder': 'Telefone'}), required=False)
     endereco = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': False,
                                                                              'maxlength': 200,
                                                                              'placeholder': 'Endereço'
-                                                                             }))
+                                                                             }), required=False)
     numero = forms.CharField(max_length=6, widget=forms.TextInput(attrs={'required': False,
                                                                          'maxlength': 200,
                                                                          'placeholder': 'Número'
-                                                                         }))
+                                                                         }), required=False)
     bairro = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'required': False,
                                                                            'maxlength': 100,
                                                                            'placeholder': 'Bairro'
-                                                                           }))
+                                                                           }), required=False)
     cidade = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'required': False,
                                                                            'maxlength': 200,
                                                                            'placeholder': 'Cidade'
-                                                                           }))
+                                                                           }), required=False)
 
-    email = forms.EmailField()
+    email = forms.EmailField(required=False)
 
     class Meta:
         model = Cliente

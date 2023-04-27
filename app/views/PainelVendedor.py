@@ -134,9 +134,10 @@ class PedidoCreateVendedorView(LoginRequiredMixin, CreateView):
         return super(PedidoCreateVendedorView, self).form_valid(form)
 
     def get_or_create_client(self, data):
-        try:
-            cliente = Cliente.objects.get(user__username=data['login'])
-        except (Exception,):
+        filter = Cliente.objects.filter(user__username=data['login'])
+        if filter.exists():
+            cliente = filter.first()
+        else:
             cliente = None
         if not cliente:
             try:

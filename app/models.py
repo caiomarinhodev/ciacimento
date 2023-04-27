@@ -21,24 +21,22 @@ class BaseAddress(models.Model):
 
     bairro = models.CharField(max_length=200, blank=True, null=True, verbose_name='Bairro')
     cidade = models.CharField(max_length=100, blank=True, null=True, verbose_name='Cidade')
-    endereco = models.CharField(max_length=200, blank=True, null=True, verbose_name='Endereço')
+    endereco = models.TextField(blank=True, null=True, verbose_name='Endereço')
     numero = models.CharField(max_length=5, blank=True, null=True, verbose_name='Número')
-    complemento = models.CharField(max_length=300, blank=True, null=True, verbose_name='Ponto de Referência')
+    complemento = models.TextField(blank=True, null=True, verbose_name='Ponto de Referência')
     lat = models.CharField(max_length=100, blank=True, null=True)
     lng = models.CharField(max_length=100, blank=True, null=True)
 
 
 class Cliente(TimeStamped, BaseAddress):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=True, null=True)
-    nome = models.CharField(max_length=300, blank=True, null=True, verbose_name='Nome')
+    nome = models.TextField(blank=True, null=True, verbose_name='Nome')
     phone = models.CharField(max_length=30, blank=True, null=True, verbose_name='Telefone')
-    full_address = models.CharField(max_length=200, blank=True, null=True)
+    full_address = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.numero = str(self.numero).replace('_', '')
         self.phone = str(self.phone).replace('_', '')
-        address = self.endereco + ", " + self.numero + ",Campina Grande,PB"
-        self.full_address = address
         super(Cliente, self).save(*args, **kwargs)
 
     def __str__(self):
