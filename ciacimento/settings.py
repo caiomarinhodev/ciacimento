@@ -95,19 +95,26 @@ DATABASES = {
     }
 }
 
-NAME_DB = os.getenv('DB_NAME', 'db.sqlite3')
+# NAME_DB = os.getenv('DB_NAME', 'db.sqlite3')
+#
+# if 'sqlite' in NAME_DB:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+#         }
+#     }
+# else:
+#     db_from_env = dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/{}'.format(NAME_DB),
+#                                          conn_max_age=600)
+#     DATABASES['default'].update(db_from_env)
 
-if 'sqlite' in NAME_DB:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-        }
-    }
-else:
-    db_from_env = dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/{}'.format(NAME_DB),
-                                         conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
+#URL_NOVO = 'postgres://ciacimento_i2ou_user:yd6L2eg1K3RQRlTvjBzz1KU26MrJTWUt@dpg-cglqb087oslael4uijeg-a.oregon-postgres.render.com/ciacimento_i2ou'
+URL_NOVO = 'postgres://ciacimento_i2ou_user:ICewoacWCXSd3ERudoOsLDDPPQCGXgjn@dpg-cifgj215rnujc4srdmmg-a.oregon-postgres.render.com/ciacimento_i2ou_k5tw'
+db_from_env = dj_database_url.config(
+    default=URL_NOVO,
+    conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
