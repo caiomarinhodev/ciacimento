@@ -186,7 +186,16 @@ class PedidoDetailVendedorView(LoginRequiredMixin, DetailView):
         else:
             pedido = self.object
             print(pedido.cliente)
-            data['forms'] = FormEditCliente(instance=pedido.cliente)
+            data['forms'] = FormEditCliente(instance=pedido.cliente,
+                                            initial={'nome': self.object.cliente.nome,
+                                                     'email': self.object.cliente.user.email,
+                                                     'phone': self.object.cliente.phone,
+                                                     'endereco': self.object.cliente.endereco,
+                                                     'numero': self.object.cliente.numero,
+                                                     'bairro': self.object.cliente.bairro,
+                                                     'cidade': self.object.cliente.cidade,
+                                                     }
+            )
             data['pontoset'] = ItemFormUpdateSet(instance=self.object)
         return data
 
@@ -211,7 +220,13 @@ class PedidoUpdateVendedorView(LoginRequiredMixin, UpdateView, ):
             if self.object.cliente:
                 data['forms'] = FormEditCliente(instance=self.object.cliente,
                                                 initial={'nome': self.object.cliente.nome,
-                                                         'email': self.object.cliente.user.email})
+                                                         'email': self.object.cliente.user.email,
+                                                         'phone': self.object.cliente.phone,
+                                                         'endereco': self.object.cliente.endereco,
+                                                         'numero': self.object.cliente.numero,
+                                                         'bairro': self.object.cliente.bairro,
+                                                         'cidade': self.object.cliente.cidade,
+                                                         })
             data['pontoset'] = ItemFormUpdateSet(instance=self.object)
         return data
 
